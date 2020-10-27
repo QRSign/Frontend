@@ -145,6 +145,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "QRSign"
+    }
+  },
+  "defaultProject": "QRSign",
+  "cli": {
+    "analytics": false
+  }
 }
