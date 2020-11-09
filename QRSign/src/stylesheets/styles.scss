@@ -1,0 +1,17 @@
+// Layout
+$small: 425px;
+$medium: 768px;
+$large: 1024px;
+$xlarge: 1600px;
+
+// Premade Styles
+a {
+    text-decoration: none;
+    color: initial;
+}
+  
+.section {
+    max-width: $xlarge;
+    margin: 0 auto;
+    padding: 0 20px;
+}

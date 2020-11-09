@@ -1,0 +1,13 @@
+@import "src/stylesheets/styles";
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgb(34, 0, 97) 0%, rgba(34, 0, 97, 0) 100%);
+    color: white;
+    height: 150px;
+    &__content {        
+    }
+}
