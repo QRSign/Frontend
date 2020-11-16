@@ -2,12 +2,14 @@
 
 .header {
     position: fixed;
+    display: flex;
+    align-items: center;
     top: 0;
     left: 0;
     right: 0;
     background-color: rgb(34, 0, 97);
     color: white;
     height: 100px;
-    &__content {        
+    &__content {
     }
 }
