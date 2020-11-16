@@ -1,49 +1,30 @@
 <section class="corps">
-  <div class="input-group-prepend d-flex flex-row">
-    <div class="input-group-text">
+  <h1>Génération du qrCode.</h1>
+  <div class="input-group-prepend">
+    <div class="mt-5">
       <input
-        type="checkbox"
-        aria-label="Checkbox for following text input"
-        checked
+        placeholder="Date and Time"
+        type="text"
+        data-open="picker2"
+        class="form-control date-time picker-opener"
+        value="cours du prof"
       />
     </div>
-    <input
-      placeholder="Date and Time"
-      type="text"
-      data-open="picker2"
-      class="form-control date-time picker-opener"
-      value="cours du prof"
-    />
-    <div class="input-group-text">
+    <div class="mt-5">
       <input
-        type="checkbox"
-        aria-label="Checkbox for following text input"
-        checked
+        type="datetime-local"
+        id="meeting-time"
+        name="meeting-time"
+        value="2018-06-12T19:30"
+        min="2018-06-07T00:00"
+        data-open="picker2"
+        class="form-control date-time picker-opener"
+        max="2018-06-14T00:00"
       />
     </div>
-    <input
-      placeholder="Date"
-      type="text"
-      data-open="picker2"
-      class="form-control date-time picker-opener"
-    />
-    <input
-      placeholder="Time"
-      type="text"
-      data-open="picker2"
-      class="form-control date-time picker-opener"
-    />
   </div>
 
   <button type="button" class="btn btn-primary btn-lg btn-block">
     Création du qrCode.
   </button>
 </section>
-
-<script>
-  $(document).ready(function () {
-    // Date Time Picker Initialization
-    $(".date-time").dateTimePicker();
-    $(".date-time-2").dateTimePicker();
-  });
-</script>
