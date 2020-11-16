@@ -8,13 +8,15 @@ import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { CorpsComponent } from './body/corps/corps.component';
 import { ProfileComponent } from './header/profile/profile.component';
+import { AuthComponent } from './component/auth/auth.component';
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
     HeaderComponent,
     CorpsComponent,
-    ProfileComponent
+    ProfileComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
