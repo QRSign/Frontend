@@ -3,6 +3,7 @@
 .profile {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     &__information {}
     &__picture {
         width: 75px;
