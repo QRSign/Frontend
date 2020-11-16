@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
+import { CorpsComponent } from './body/corps/corps.component';
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
-    HeaderComponent
+    HeaderComponent,
+    CorpsComponent
   ],
   imports: [
     BrowserModule,
