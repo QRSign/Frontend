@@ -7,12 +7,14 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { CorpsComponent } from './body/corps/corps.component';
+import { ProfileComponent } from './header/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
     HeaderComponent,
-    CorpsComponent
+    CorpsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
