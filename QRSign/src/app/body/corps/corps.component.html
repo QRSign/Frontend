@@ -24,7 +24,16 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-primary btn-lg btn-block">
+  <button
+    onclick="qrcode()"
+    type="button"
+    class="btn btn-primary btn-lg btn-block"
+  >
     Création du qrCode.
   </button>
+  <div *ngIf="test">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. A animi provident
+    accusamus reprehenderit voluptas deserunt placeat ipsam, asperiores deleniti
+    alias.
+  </div>
 </section>
