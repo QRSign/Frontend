@@ -9,7 +9,7 @@ import * as utils from '../../utils/utils';
 })
 export class CorpsComponent implements OnInit {
   todayDate: String;
-  qrcodeShow: boolean = false;
+  qrcode: boolean = false;
 
   constructor() {}
 
@@ -22,6 +22,6 @@ export class CorpsComponent implements OnInit {
   }
 
   qrcodeShow() {
-    this.qrcodeShow = !this.qrcodeShow;
+    this.qrcode = !this.qrcode;
   }
 }

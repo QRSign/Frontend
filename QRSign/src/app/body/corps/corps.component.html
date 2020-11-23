@@ -36,14 +36,15 @@
     </div>
   </div>
 
-    <button
-      (click)="qrcodeShow()"
-      type="button"
-      class="btn btn-primary btn-lg btn-block"
-    >
-      Création du qrCode.
-    </button>
+  <button
+    (click)="qrcodeShow()"
+    type="button"
+    class="btn btn-primary btn-lg btn-block"
+  >
+    Création du qrCode.
+  </button>
 
+  <div *ngIf="qrcode">
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. A animi provident
     accusamus reprehenderit voluptas deserunt placeat ipsam, asperiores deleniti
     alias.
