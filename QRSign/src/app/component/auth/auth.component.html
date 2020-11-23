@@ -1,5 +1,17 @@
 <section class="auth">
-    <h2>Authentification</h2>
-    <button class="btn btn-success" *ngIf="!authStatus" (click)="onSignIn()">Se connecter</button>
-    <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()">Se déconnecter</button>
+  <div class="auth__login">
+    <div class="auth__login__title">Se connecter</div>
+    <div class="auth__login__username">
+      <input type="text" />
+    </div>
+    <div class="auth__login__password">
+      <input type="password" />
+    </div>
+  </div>
+  <button class="btn btn-success" *ngIf="!authStatus" (click)="onSignIn()">
+    Se connecter
+  </button>
+  <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()">
+    Se déconnecter
+  </button>
 </section>
