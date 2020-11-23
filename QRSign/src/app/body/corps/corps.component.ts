@@ -9,7 +9,7 @@ import * as utils from '../../utils/utils';
 })
 export class CorpsComponent implements OnInit {
   todayDate: String;
-  test: boolean = false;
+  qrcodeShow: boolean = false;
 
   constructor() {}
 
@@ -22,7 +22,7 @@ export class CorpsComponent implements OnInit {
     this.todayDate = utils.getTodayDate();
   }
 
-  qrcode() {
-    this.test = !this.test;
+  qrcodeShow() {
+    this.qrcodeShow = !this.qrcodeShow;
   }
 }
