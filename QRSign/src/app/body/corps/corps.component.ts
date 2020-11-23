@@ -14,12 +14,11 @@ export class CorpsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    var now = new Date().toString().split(' ');
-    console.log('now', now);
+    this.getTime();
   }
 
   getTime() {
-    this.todayDate = utils.getTodayDate();
+    this.todayDate = utils.getTodayDate() + 'T' + utils.getTodayTime();
   }
 
   qrcodeShow() {
