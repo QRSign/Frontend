@@ -1,12 +1,12 @@
 <section class="auth">
   <div class="auth__login">
     <div class="auth__login__title">Se connecter</div>
-    <div class="auth__login__username">
-      <input type="text" />
-    </div>
-    <div class="auth__login__password">
-      <input type="password" />
-    </div>
+    <mat-form-field class="auth__login__username">
+      <mat-label>Adresse mail</mat-label>
+    </mat-form-field>
+    <mat-form-field class="auth__login__password">
+      <mat-label>Mot de passe</mat-label>
+    </mat-form-field>
   </div>
   <button class="btn btn-success" *ngIf="!authStatus" (click)="onSignIn()">
     Se connecter

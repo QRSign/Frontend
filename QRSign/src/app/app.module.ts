@@ -11,6 +11,8 @@ import { ProfileComponent } from './header/profile/profile.component';
 import { AuthComponent } from './component/auth/auth.component';
 import { AuthService } from './utils/auth.service';
 import { AuthGuard } from './utils/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,14 +20,16 @@ import { AuthGuard } from './utils/auth.guard';
     HeaderComponent,
     CorpsComponent,
     ProfileComponent,
-    AuthComponent
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    BrowserAnimationsModule,
+    MatInputModule,
   ],
   providers: [AuthService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
