@@ -9,6 +9,12 @@ export function getTodayDate() {
 export function getTodayTime() {
   var today = new Date();
   var hh = String(today.getHours());
+  Number(hh) < 10 ? (hh = '0' + hh) : hh;
   var mm = String(today.getMinutes());
+  Number(mm) < 10 ? (mm = '0' + mm) : mm;
   return hh + ':' + mm;
+}
+
+export function getValidDateFormat(): string {
+  return getTodayDate() + 'T' + getTodayTime();
 }

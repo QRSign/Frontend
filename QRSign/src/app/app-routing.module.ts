@@ -5,12 +5,12 @@ import { AuthComponent } from './component/auth/auth.component';
 import { AuthGuard } from './utils/auth.guard';
 
 const routes: Routes = [
-  { path: "", canActivate: [AuthGuard], component: CorpsComponent },
-  { path: "auth", component: AuthComponent}
+  { path: 'auth', component: AuthComponent },
+  { path: '', canActivate: [AuthGuard], component: CorpsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

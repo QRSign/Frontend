@@ -1,5 +1,5 @@
 export class AuthService {
-  isAuth = false;
+  isAuth = true;
 
   signIn() {
     return new Promise((resolve, reject) => {
