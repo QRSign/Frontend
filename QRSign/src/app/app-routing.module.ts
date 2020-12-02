@@ -13,8 +13,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'test',
+        path: 'enter',
         component: EnterComponent,
+      },
+      {
+        path: '**',
+        redirectTo: '',
       },
     ],
   },
