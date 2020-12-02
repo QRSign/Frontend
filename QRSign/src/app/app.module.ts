@@ -13,6 +13,7 @@ import { AuthService } from './utils/auth.service';
 import { AuthGuard } from './utils/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { EnterComponent } from './body/enter/enter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     CorpsComponent,
     ProfileComponent,
     AuthComponent,
+    EnterComponent,
   ],
   imports: [
     BrowserModule,
