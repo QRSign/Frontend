@@ -14,6 +14,7 @@ import { AuthGuard } from './utils/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { EnterComponent } from './body/enter/enter.component';
+import { QrcodeCreationComponent } from './qrcode-creation/qrcode-creation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { EnterComponent } from './body/enter/enter.component';
     ProfileComponent,
     AuthComponent,
     EnterComponent,
+    QrcodeCreationComponent,
   ],
   imports: [
     BrowserModule,
