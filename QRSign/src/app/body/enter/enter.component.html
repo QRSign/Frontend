@@ -1,5 +1,6 @@
-<section class="enter">
-  HERE IS MY TEST
-  <div #canvas id="aa" class="enter__test">TEST</div>
-  HERE IS MY TEST
+<section #sPad class="enter">
+  <canvas width="900" height="600"></canvas>
+  <button (click)="clearPad()">clear</button>
+  <button (click)="undoPad()">undo</button>
+  <button (click)="savePNG()">save</button>
 </section>
