@@ -8,15 +8,30 @@ $xlarge: 1600px;
 $black-light: #2b2b2b;
 $black: black;
 $white: white;
+$blue: #3763ca;
+$blue-hover: #061435;
 
 // Premade Styles
 a {
-    text-decoration: none;
-    color: initial;
+  text-decoration: none;
+  color: initial;
 }
-  
+
 .section {
-    max-width: $xlarge;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: $xlarge;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.custom-button {
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid $blue-hover;
+  background-color: $blue;
+  color: $white;
+  transition-duration: 100ms;
+  &:hover {
+    background-color: $blue-hover;
+  }
 }

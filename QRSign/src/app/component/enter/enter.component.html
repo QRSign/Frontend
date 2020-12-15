@@ -1,6 +1,23 @@
 <section #sPad class="enter">
-  <canvas width="900" height="600"></canvas>
-  <button (click)="clearPad()">clear</button>
-  <button (click)="undoPad()">undo</button>
-  <button (click)="savePNG()">save</button>
+  <canvas width="450" height="300" class="enter__canvas"></canvas>
+  <div class="enter__edit">
+    <button
+      class="custom-button enter__button enter__button__clear"
+      (click)="clearPad()"
+    >
+      Supprimer
+    </button>
+    <button
+      class="custom-button enter__button enter__button__undo"
+      (click)="undoPad()"
+    >
+      Refaire
+    </button>
+  </div>
+  <button
+    class="custom-button enter__button enter__button__save"
+    (click)="savePNG()"
+  >
+    Signer
+  </button>
 </section>
