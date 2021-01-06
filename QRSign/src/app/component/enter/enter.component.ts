@@ -16,7 +16,7 @@ export class EnterComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.signaturePad = new SignaturePad(
-      this.signaturePadElement.nativeElement.childNodes[0]
+      this.signaturePadElement.nativeElement
     );
   }
 

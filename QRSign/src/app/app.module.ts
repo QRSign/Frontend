@@ -13,6 +13,7 @@ import { AuthService } from './utils/auth.service';
 import { AuthGuard } from './utils/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { EnterComponent } from './component/enter/enter.component';
 import { QrcodeCreationComponent } from './component/qrcode-creation/qrcode-creation.component';
 @NgModule({
@@ -32,6 +33,7 @@ import { QrcodeCreationComponent } from './component/qrcode-creation/qrcode-crea
     LayoutModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatButtonModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],

@@ -1,23 +1,16 @@
-<section #sPad class="enter">
-  <canvas width="450" height="300" class="enter__canvas"></canvas>
-  <div class="enter__edit">
-    <button
-      class="custom-button enter__button enter__button__clear"
-      (click)="clearPad()"
-    >
-      Supprimer
-    </button>
-    <button
-      class="custom-button enter__button enter__button__undo"
-      (click)="undoPad()"
-    >
-      Refaire
-    </button>
+<section class="enter">
+  <div class="enter__canvas">
+    <canvas #sPad width="450" height="300" class="canvas"></canvas>
+    <div class="enter__edit">
+      <button mat-raised-button class="custom-button" (click)="clearPad()">
+        Supprimer
+      </button>
+      <button mat-raised-button class="custom-button" (click)="undoPad()">
+        Refaire
+      </button>
+    </div>
   </div>
-  <button
-    class="custom-button enter__button enter__button__save"
-    (click)="savePNG()"
-  >
+  <button mat-raised-button class="custom-button" (click)="savePNG()">
     Signer
   </button>
 </section>
