@@ -1,6 +1,8 @@
 <section class="enter">
   <div class="enter__canvas">
-    <canvas #sPad width="450" height="300" class="canvas"></canvas>
+    <div class="canvas">
+      <canvas #sPad width="450" height="300" class="canvas__box"></canvas>
+    </div>
     <div class="enter__edit">
       <button mat-raised-button class="custom-button" (click)="clearPad()">
         Supprimer
@@ -9,8 +11,8 @@
         Refaire
       </button>
     </div>
+    <button mat-raised-button class="custom-button" (click)="savePNG()">
+      Signer
+    </button>
   </div>
-  <button mat-raised-button class="custom-button" (click)="savePNG()">
-    Signer
-  </button>
 </section>
