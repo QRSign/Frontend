@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/utils/service/auth.service';
+import { MessageService } from 'src/app/utils/service/message.service';
+import { passwordValidator } from 'src/app/utils/service/validator.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,7 +18,39 @@ import { Component, OnInit } from '@angular/core';
 export class SignUpComponent implements OnInit {
   hide: boolean = true;
 
-  constructor() {}
+  loginForm: FormGroup;
+  first_name = new FormControl('', [Validators.required]);
+  last_name = new FormControl('', [Validators.required]);
+  mail = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required, passwordValidator()]);
+  // password_confimation = new FormControl('', [Validators.required]);
 
-  ngOnInit(): void {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private messageService: MessageService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      first_name: this.first_name,
+      last_name: this.last_name,
+      mail: this.mail,
+      password: this.password,
+    });
+  }
+
+  getErrorMessage(control: FormControl): string {
+    return this.messageService.getErrorMessage(control);
+  }
+
+  redirect(redirectUrl): void {
+    this.router.navigateByUrl(redirectUrl);
+  }
+
+  onSubmit(): void {
+    const { first_name, last_name, mail, password } = this.loginForm.value;
+    this.authService.createAccount(first_name, last_name, mail, password);
+  }
 }

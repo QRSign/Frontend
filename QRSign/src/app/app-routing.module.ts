@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { UserComponent } from './auth/user/user.component';
 import { CorpsComponent } from './body/corps/corps.component';
 import { EnterComponent } from './component/enter/enter.component';
@@ -9,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     component: CorpsComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'enter',

@@ -1,25 +1,33 @@
 <section class="sign-up">
-  <form action="">
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
     <div class="column-display">
       <div class="sign-up__left-column">
         <div class="sign-up__lastname">
           <mat-form-field>
             <mat-label>Nom</mat-label>
-            <input matInput />
+            <input matInput type="text" formControlName="first_name" />
           </mat-form-field>
         </div>
 
         <div class="sign-up__firstname">
           <mat-form-field>
             <mat-label>Prénom</mat-label>
-            <input matInput />
+            <input matInput type="text" formControlName="last_name" />
           </mat-form-field>
         </div>
 
         <div class="sign-up__mail">
           <mat-form-field>
             <mat-label>E-mail</mat-label>
-            <input matInput placeholder="prenom.nom@lacatholille.fr" />
+            <input
+              matInput
+              type="email"
+              formControlName="mail"
+              placeholder="prenom.nom@lacatholille.fr"
+            />
+            <mat-error *ngIf="mail.invalid">{{
+              getErrorMessage(mail)
+            }}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -28,25 +36,37 @@
         <div class="sign-up__password">
           <mat-form-field>
             <mat-label>Mot de passe</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" />
+            <input
+              matInput
+              formControlName="password"
+              [type]="hide ? 'password' : 'text'"
+            />
             <button mat-icon-button matSuffix (click)="hide = !hide">
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>
         </div>
 
-        <div class="sign-up__password-confirm">
+        <!-- <div class="sign-up__password-confirm">
           <mat-form-field>
             <mat-label>Mot de passe (confirmation)</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" />
+            <input
+              matInput
+              formControlName="password_confimation"
+              [type]="hide ? 'password' : 'text'"
+            />
             <button mat-icon-button matSuffix (click)="hide = !hide">
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>
-        </div>
+        </div> -->
       </div>
     </div>
-    <button mat-raised-button class="custom-button sign-in__button">
+    <button
+      type="submit"
+      mat-raised-button
+      class="custom-button sign-in__button"
+    >
       Créer un compte
     </button>
   </form>

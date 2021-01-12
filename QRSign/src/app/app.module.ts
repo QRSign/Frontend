@@ -19,6 +19,10 @@ import { SignUpComponent } from './auth/user/sign-up/sign-up.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { reducers, metaReducers } from './utils/reducers';
+import { StoreModule } from '@ngrx/store';
+import { AuthGuard } from './auth/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,8 +46,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatTabsModule,
     MatFormFieldModule,
     MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
