@@ -8,14 +8,17 @@ import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { CorpsComponent } from './body/corps/corps.component';
 import { ProfileComponent } from './header/profile/profile.component';
-import { AuthComponent } from './component/auth/auth.component';
-import { AuthService } from './utils/auth.service';
-import { AuthGuard } from './utils/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { EnterComponent } from './component/enter/enter.component';
 import { QrcodeCreationComponent } from './component/qrcode-creation/qrcode-creation.component';
+import { UserComponent } from './auth/user/user.component';
+import { SignInComponent } from './auth/user/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/user/sign-up/sign-up.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,9 +26,11 @@ import { QrcodeCreationComponent } from './component/qrcode-creation/qrcode-crea
     HeaderComponent,
     CorpsComponent,
     ProfileComponent,
-    AuthComponent,
     EnterComponent,
     QrcodeCreationComponent,
+    UserComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +39,11 @@ import { QrcodeCreationComponent } from './component/qrcode-creation/qrcode-crea
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatIconModule,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

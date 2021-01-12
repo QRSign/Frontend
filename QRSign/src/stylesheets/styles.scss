@@ -29,3 +29,22 @@ a {
   width: 100%;
   padding: 5px 10px;
 }
+
+.column-display {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: $medium) {
+    flex-direction: row;
+  }
+  & > * {
+    width: 100%;
+    @media screen and (min-width: $medium) {
+      &:first-child {
+        margin-right: 20px;
+      }
+      &:last-child {
+        margin-left: 20px;
+      }
+    }
+  }
+}

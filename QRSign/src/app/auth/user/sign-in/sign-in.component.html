@@ -1,0 +1,25 @@
+<section class="sign-in">
+  <form action="">
+    <div class="column-display">
+      <div class="sign-in__mail">
+        <mat-form-field>
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="prenom.nom@lacatholille.fr" />
+        </mat-form-field>
+      </div>
+
+      <div class="sign-in__password">
+        <mat-form-field>
+          <mat-label>Mot de passe</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" />
+          <button mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button class="custom-button sign-in__button">
+      Se connecter
+    </button>
+  </form>
+</section>
