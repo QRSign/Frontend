@@ -14,23 +14,31 @@ import { AuthService } from 'src/app/utils/services/auth.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
+
+  // visibility of password
   hide: boolean = true;
 
+  isSubmitted: boolean = false;
   loginForm: FormGroup;
+
   mail = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
 
   constructor(
-    private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       mail: this.mail,
       password: this.password,
     });
+  }
+
+  get formControls() {
+    return this.loginForm.controls;
   }
 
   redirect(redirectUrl): void {
@@ -38,8 +46,12 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // const { mail, password } = this.loginForm.value;
-    // this.authService.login(mail, password);
-    console.log("onSubmit");
+    console.log(this.loginForm.value);
+    this.isSubmitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.authService.logIn(this.loginForm.value);
+    this.router.navigateByUrl('/');
   }
 }
