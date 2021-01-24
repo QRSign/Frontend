@@ -25,9 +25,7 @@
               formControlName="mail"
               placeholder="prenom.nom@lacatholille.fr"
             />
-            <mat-error *ngIf="mail.invalid">{{
-              getErrorMessage(mail)
-            }}</mat-error>
+            <mat-error *ngIf="mail.invalid">ERROR</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -41,7 +39,7 @@
               formControlName="password"
               [type]="hide ? 'password' : 'text'"
             />
-            <button mat-icon-button matSuffix (click)="hide = !hide">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>
@@ -55,7 +53,7 @@
               formControlName="password_confimation"
               [type]="hide ? 'password' : 'text'"
             />
-            <button mat-icon-button matSuffix (click)="hide = !hide">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>

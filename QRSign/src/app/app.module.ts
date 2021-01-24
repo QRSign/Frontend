@@ -20,9 +20,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { reducers, metaReducers } from './utils/reducers';
-import { StoreModule } from '@ngrx/store';
-import { AuthGuard } from './auth/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,9 +45,8 @@ import { AuthGuard } from './auth/auth.guard';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
   ],
-  providers: [AuthGuard],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

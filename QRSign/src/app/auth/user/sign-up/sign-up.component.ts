@@ -6,9 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/utils/service/auth.service';
-import { MessageService } from 'src/app/utils/service/message.service';
-import { passwordValidator } from 'src/app/utils/service/validator.service';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import { passwordValidator } from 'src/app/utils/services/validator.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -28,7 +27,6 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private messageService: MessageService,
     private router: Router
   ) {}
 
@@ -41,16 +39,13 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  getErrorMessage(control: FormControl): string {
-    return this.messageService.getErrorMessage(control);
-  }
-
   redirect(redirectUrl): void {
     this.router.navigateByUrl(redirectUrl);
   }
 
   onSubmit(): void {
-    const { first_name, last_name, mail, password } = this.loginForm.value;
-    this.authService.createAccount(first_name, last_name, mail, password);
+    // const { first_name, last_name, mail, password } = this.loginForm.value;
+    // this.authService.createAccount(first_name, last_name, mail, password);
+    console.log("onSubmit");
   }
 }
