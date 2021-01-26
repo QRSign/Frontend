@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/utils/services/auth.service';
+import { AuthService, TokenPayload } from 'src/app/utils/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,15 +14,18 @@ import { AuthService } from 'src/app/utils/services/auth.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
-
   // visibility of password
   hide: boolean = true;
 
-  isSubmitted: boolean = false;
   loginForm: FormGroup;
 
   mail = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
+
+  credentials: TokenPayload = {
+    email: '',
+    password: '',
+  };
 
   constructor(
     private authService: AuthService,
@@ -41,17 +44,15 @@ export class SignInComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  redirect(redirectUrl): void {
-    this.router.navigateByUrl(redirectUrl);
-  }
-
   onSubmit(): void {
-    console.log(this.loginForm.value);
-    this.isSubmitted = true;
-    if (this.loginForm.invalid) {
-      return;
-    }
-    this.authService.logIn(this.loginForm.value);
-    this.router.navigateByUrl('/');
+    this.credentials = this.loginForm.value;
+    this.authService.login(this.credentials).subscribe(
+      () => {
+        this.router.navigateByUrl('/');
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 }
