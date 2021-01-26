@@ -33,6 +33,15 @@ a {
   padding: 5px 10px;
 }
 
+.column-shape {
+  margin: 0 20% 0 20%;
+}
+@media only screen and (max-width: $medium) {
+  .column-shape {
+    margin: 0;
+  }
+}
+
 .column-display {
   display: flex;
   flex-direction: column;
