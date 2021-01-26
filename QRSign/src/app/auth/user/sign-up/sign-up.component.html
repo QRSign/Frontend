@@ -1,4 +1,4 @@
-<section class="sign-up">
+<section class="sign-up column-shape">
   <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
     <div class="column-display">
       <div class="sign-up__left-column">
@@ -39,7 +39,12 @@
               formControlName="password"
               [type]="hide ? 'password' : 'text'"
             />
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>

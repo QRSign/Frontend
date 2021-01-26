@@ -1,4 +1,4 @@
-<section class="sign-in">
+<section class="sign-in column-shape">
   <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
     <div class="column-display">
       <div class="sign-in__mail">
@@ -22,7 +22,12 @@
             formControlName="password"
             [type]="hide ? 'password' : 'text'"
           />
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+          <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+          >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
           <mat-error *ngIf="password.invalid">ERROR</mat-error>
