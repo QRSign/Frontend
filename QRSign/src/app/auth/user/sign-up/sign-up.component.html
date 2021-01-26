@@ -61,19 +61,31 @@
           </mat-form-field>
         </div>
 
-        <!-- <div class="sign-up__password-confirm">
+        <div class="sign-up__password-validator">
+          <app-password-validator></app-password-validator>
+        </div>
+
+        <div class="sign-up__password-confirm">
           <mat-form-field>
             <mat-label>Mot de passe (confirmation)</mat-label>
             <input
               matInput
-              formControlName="password_confimation"
+              formControlName="password_confirmation"
               [type]="hide ? 'password' : 'text'"
             />
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
+            <mat-error *ngIf="password_confirmation.invalid">{{
+              getErrorMessage("password_confirmation")
+            }}</mat-error>
           </mat-form-field>
-        </div> -->
+        </div>
       </div>
     </div>
     <button
