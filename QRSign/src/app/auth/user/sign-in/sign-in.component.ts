@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, TokenPayload } from 'src/app/utils/services/auth.service';
+import { MessageService } from 'src/app/utils/services/message.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,7 +20,7 @@ export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  mail = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
 
   credentials: TokenPayload = {
@@ -30,18 +31,19 @@ export class SignInComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      mail: this.mail,
+      email: this.email,
       password: this.password,
     });
   }
 
-  get formControls() {
-    return this.loginForm.controls;
+  getErrorMessage(type: string = 'default'): string {
+    return this.messageService.getErrorMessage(type);
   }
 
   onSubmit(): void {

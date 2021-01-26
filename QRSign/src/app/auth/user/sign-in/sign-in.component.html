@@ -6,11 +6,13 @@
           <mat-label>E-mail</mat-label>
           <input
             matInput
-            formControlName="mail"
+            formControlName="email"
             type="email"
             placeholder="prenom.nom@lacatholille.fr"
           />
-          <mat-error *ngIf="mail.invalid">ERROR</mat-error>
+          <mat-error *ngIf="email.invalid">{{
+            getErrorMessage("email")
+          }}</mat-error>
         </mat-form-field>
       </div>
 
@@ -22,10 +24,17 @@
             formControlName="password"
             [type]="hide ? 'password' : 'text'"
           />
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+          <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+          >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
-          <mat-error *ngIf="password.invalid">ERROR</mat-error>
+          <mat-error *ngIf="password.invalid">{{
+            getErrorMessage("password")
+          }}</mat-error>
         </mat-form-field>
       </div>
     </div>

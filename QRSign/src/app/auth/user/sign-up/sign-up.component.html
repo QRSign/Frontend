@@ -6,6 +6,9 @@
           <mat-form-field>
             <mat-label>Nom</mat-label>
             <input matInput type="text" formControlName="first_name" />
+            <mat-error *ngIf="first_name.invalid">{{
+              getErrorMessage("required")
+            }}</mat-error>
           </mat-form-field>
         </div>
 
@@ -13,6 +16,9 @@
           <mat-form-field>
             <mat-label>Prénom</mat-label>
             <input matInput type="text" formControlName="last_name" />
+            <mat-error *ngIf="last_name.invalid">{{
+              getErrorMessage("required")
+            }}</mat-error>
           </mat-form-field>
         </div>
 
@@ -22,10 +28,12 @@
             <input
               matInput
               type="email"
-              formControlName="mail"
+              formControlName="email"
               placeholder="prenom.nom@lacatholille.fr"
             />
-            <mat-error *ngIf="mail.invalid">ERROR</mat-error>
+            <mat-error *ngIf="email.invalid">{{
+              getErrorMessage("email")
+            }}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -39,9 +47,17 @@
               formControlName="password"
               [type]="hide ? 'password' : 'text'"
             />
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+            >
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
+            <mat-error *ngIf="password.invalid">{{
+              getErrorMessage("password")
+            }}</mat-error>
           </mat-form-field>
         </div>
 

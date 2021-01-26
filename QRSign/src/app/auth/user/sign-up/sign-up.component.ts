@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/utils/services/auth.service';
+import { MessageService } from 'src/app/utils/services/message.service';
 import { passwordValidator } from 'src/app/utils/services/validator.service';
 
 @Component({
@@ -20,23 +21,28 @@ export class SignUpComponent implements OnInit {
   loginForm: FormGroup;
   first_name = new FormControl('', [Validators.required]);
   last_name = new FormControl('', [Validators.required]);
-  mail = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required, passwordValidator()]);
   // password_confimation = new FormControl('', [Validators.required]);
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       first_name: this.first_name,
       last_name: this.last_name,
-      mail: this.mail,
+      email: this.email,
       password: this.password,
     });
+  }
+
+  getErrorMessage(type: string = 'default'): string {
+    return this.messageService.getErrorMessage(type);
   }
 
   redirect(redirectUrl): void {
@@ -46,6 +52,6 @@ export class SignUpComponent implements OnInit {
   onSubmit(): void {
     // const { first_name, last_name, mail, password } = this.loginForm.value;
     // this.authService.createAccount(first_name, last_name, mail, password);
-    console.log("onSubmit");
+    console.log('onSubmit');
   }
 }
