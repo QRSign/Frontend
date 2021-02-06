@@ -12,7 +12,8 @@ interface TokenResponse {
 export interface TokenPayload {
   email: string;
   password: string;
-  name?: string;
+  first_name?: string;
+  last_name?: string;
 }
 @Injectable({
   providedIn: 'root',

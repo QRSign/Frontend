@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/utils/services/auth.service';
+import { AuthService, TokenPayload } from 'src/app/utils/services/auth.service';
 import { MessageService } from 'src/app/utils/services/message.service';
 import {
   emailValidator,
@@ -26,10 +26,17 @@ export class SignUpComponent implements OnInit {
   last_name = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, emailValidator()]);
   password = new FormControl('', [Validators.required]);
-  password_confirmation = new FormControl('', [
-    Validators.required,
-    samePassword(this.password),
-  ]);
+  // password_confirmation = new FormControl('', [
+  //   Validators.required,
+  //   samePassword(this.password),
+  // ]);
+
+  credentials: TokenPayload = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -44,7 +51,7 @@ export class SignUpComponent implements OnInit {
       last_name: this.last_name,
       email: this.email,
       password: this.password,
-      password_confirmation: this.password_confirmation,
+      // password_confirmation: this.password_confirmation,
     });
   }
 
@@ -57,6 +64,15 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.credentials = this.loginForm.value;
+    this.authService.register(this.credentials).subscribe(
+      () => {
+        this.router.navigateByUrl('/');
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
     // const { first_name, last_name, mail, password } = this.loginForm.value;
     // this.authService.createAccount(first_name, last_name, mail, password);
     console.log('onSubmit');
