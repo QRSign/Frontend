@@ -5,9 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
-
-import * as utils from '../../utils/utils';
 
 @Component({
   selector: 'app-qrcode-creation',
@@ -15,22 +14,29 @@ import * as utils from '../../utils/utils';
   styleUrls: ['./qrcode-creation.component.scss'],
 })
 export class QrcodeCreationComponent implements OnInit {
-  date: string;
   title: string = 'Créer un nouveau cours';
 
   newCourseForm: FormGroup;
+  prof_name = new FormControl('', [Validators.required]);
   course_name = new FormControl('', [Validators.required]);
+  date = new FormControl(new Date());
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private _adapter: DateAdapter<any>,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.date = utils.getValidDateFormat();
+    this._adapter.setLocale('fr');
     this.newCourseForm = this.fb.group({
+      prof_name: this.prof_name,
       course_name: this.course_name,
+      date: this.date,
     });
   }
 
   onSubmit(): void {
-    console.log('submited');
+    console.log(this.newCourseForm.value);
   }
 }

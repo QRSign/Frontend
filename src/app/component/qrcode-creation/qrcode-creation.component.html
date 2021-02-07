@@ -3,6 +3,35 @@
     <app-title [title]="title"></app-title>
   </div>
   <form (ngSubmit)="onSubmit()" [formGroup]="newCourseForm">
+    <div class="column-display">
+      <div class="qrcode-creation__left-column">
+        <div class="qrcode-creation__date">
+          <mat-form-field appearance="fill">
+            <mat-label>Date du cours</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="date" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="qrcode-creation__right-column">
+        <div class="qrcode-creation__name">
+          <mat-form-field>
+            <mat-label>Nom du professeur</mat-label>
+            <input matInput type="text" formControlName="prof_name" />
+          </mat-form-field>
+        </div>
+        <div class="qrcode-creation__name">
+          <mat-form-field>
+            <mat-label>Nom du cours</mat-label>
+            <input matInput type="text" formControlName="course_name" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
     <button
       type="submit"
       mat-raised-button
