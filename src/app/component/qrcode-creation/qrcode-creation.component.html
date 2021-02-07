@@ -1,5 +1,14 @@
-<section class="qrcode-creation">
+<section class="qrcode-creation column-shape">
   <div class="qrcode-creation__title">
     <app-title [title]="title"></app-title>
   </div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="newCourseForm">
+    <button
+      type="submit"
+      mat-raised-button
+      class="custom-button qrcode-creation__button"
+    >
+      Créer un nouveau cours
+    </button>
+  </form>
 </section>

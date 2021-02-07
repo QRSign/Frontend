@@ -36,12 +36,8 @@ a {
 }
 
 .column-shape {
-  margin: 0 20% 0 20%;
-}
-@media only screen and (max-width: $medium) {
-  .column-shape {
-    margin: 0;
-  }
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .column-display {
