@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PasswordValidatorComponent } from './component/password-validator/password-validator.component';
+import { TitleComponent } from './component/title/title.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { PasswordValidatorComponent } from './component/password-validator/passw
     SignInComponent,
     SignUpComponent,
     PasswordValidatorComponent,
+    TitleComponent,
   ],
   imports: [
     BrowserModule,

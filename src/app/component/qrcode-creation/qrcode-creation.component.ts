@@ -9,6 +9,8 @@ import * as utils from '../../utils/utils';
 })
 export class QrcodeCreationComponent implements OnInit {
   date: string;
+  title: string = 'Créer un nouveau cours';
+
   constructor() {}
 
   ngOnInit(): void {
