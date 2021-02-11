@@ -1,1 +1,19 @@
 @import "src/stylesheets/styles";
+
+.qrcode-creation {
+  &__timer {
+    &--table {
+      width: 100%;
+      tr {
+        td {
+          &:first-child {
+            padding-right: 5px;
+          }
+          &:last-child {
+            padding-left: 5px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,6 +16,36 @@
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
         </div>
+        <div class="qrcode-creation__time">
+          <mat-form-field>
+            <mat-label>Heure de début de cours</mat-label>
+            <input matInput [ngxTimepicker]="picker" formControlName="time" />
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+        <div class="qrcode-creation__timer">
+          <table class="qrcode-creation__timer--table">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>Temps accordé pour valider la présence</mat-label>
+                  <input matInput type="text" formControlName="timer" />
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <mat-select
+                    [value]="timeUnity.value"
+                    formControlName="timeUnity"
+                  >
+                    <mat-option value="hour">Heure(s)</mat-option>
+                    <mat-option value="min">Minute(s)</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div class="qrcode-creation__right-column">
         <div class="qrcode-creation__name">

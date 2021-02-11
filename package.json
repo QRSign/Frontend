@@ -23,6 +23,7 @@
     "@angular/router": "~10.1.6",
     "@ngrx/store": "^10.1.2",
     "ngrx-store-localstorage": "^10.1.1",
+    "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.0",
     "signature_pad": "^3.0.0-beta.4",
     "tslib": "^2.0.0",
