@@ -27,12 +27,12 @@
             <mat-label>E-mail</mat-label>
             <input
               matInput
-              type="email"
-              formControlName="email"
+              type="mail"
+              formControlName="mail"
               placeholder="prenom.nom@lacatholille.fr"
             />
-            <mat-error *ngIf="email.invalid">{{
-              getErrorMessage("email")
+            <mat-error *ngIf="mail.invalid">{{
+              getErrorMessage("mail")
             }}</mat-error>
           </mat-form-field>
         </div>

@@ -10,7 +10,7 @@ interface TokenResponse {
 }
 
 export interface TokenPayload {
-  email: string;
+  mail: string;
   password: string;
   first_name?: string;
   last_name?: string;
@@ -20,6 +20,7 @@ export interface TokenPayload {
 })
 export class AuthService {
   private token: string;
+  private API: string = 'http://127.0.0.1:5000';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -55,7 +56,8 @@ export class AuthService {
 
   public isLoggedIn(): boolean {
     const profil = this.getProfil();
-    return profil ? profil.exp > Date.now() / 1000 : false;
+    // return profil ? profil.exp > Date.now() / 1000 : false;
+    return true;
   }
 
   private request(
@@ -66,9 +68,9 @@ export class AuthService {
     let base$;
 
     if (method === 'post') {
-      base$ = this.http.post(`/api/${type}`, profil);
+      base$ = this.http.post(`${this.API}/${type}`, profil);
     } else {
-      base$ = this.http.get(`/api/${type}`, {
+      base$ = this.http.get(`${this.API}/${type}`, {
         headers: { Authorization: `Bearer ${this.getToken()}` },
       });
     }

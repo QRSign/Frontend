@@ -9,6 +9,10 @@ import { AuthGuard } from './utils/guard/auth.guard';
 const routes: Routes = [
   { path: 'auth', component: UserComponent },
   {
+    path: 'enter',
+    component: EnterComponent,
+  },
+  {
     path: '',
     component: CorpsComponent,
     canActivate: [AuthGuard],
@@ -16,10 +20,6 @@ const routes: Routes = [
       {
         path: '',
         component: QrcodeCreationComponent,
-      },
-      {
-        path: 'enter',
-        component: EnterComponent,
       },
       {
         path: '**',

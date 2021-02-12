@@ -6,12 +6,12 @@
           <mat-label>E-mail</mat-label>
           <input
             matInput
-            formControlName="email"
-            type="email"
+            formControlName="mail"
+            type="mail"
             placeholder="prenom.nom@lacatholille.fr"
           />
-          <mat-error *ngIf="email.invalid">{{
-            getErrorMessage("email")
+          <mat-error *ngIf="mail.invalid">{{
+            getErrorMessage("mail")
           }}</mat-error>
         </mat-form-field>
       </div>

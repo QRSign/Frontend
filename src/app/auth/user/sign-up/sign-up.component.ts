@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
   loginForm: FormGroup;
   first_name = new FormControl('', [Validators.required]);
   last_name = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, emailValidator()]);
+  mail = new FormControl('', [Validators.required, emailValidator()]);
   password = new FormControl('', [Validators.required]);
   // password_confirmation = new FormControl('', [
   //   Validators.required,
@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
   credentials: TokenPayload = {
     first_name: '',
     last_name: '',
-    email: '',
+    mail: '',
     password: '',
   };
 
@@ -49,7 +49,7 @@ export class SignUpComponent implements OnInit {
     this.loginForm = this.fb.group({
       first_name: this.first_name,
       last_name: this.last_name,
-      email: this.email,
+      mail: this.mail,
       password: this.password,
       // password_confirmation: this.password_confirmation,
     });
@@ -67,6 +67,7 @@ export class SignUpComponent implements OnInit {
     this.credentials = this.loginForm.value;
     this.authService.register(this.credentials).subscribe(
       () => {
+        console.log('success');
         this.router.navigateByUrl('/');
       },
       (err) => {
@@ -75,6 +76,6 @@ export class SignUpComponent implements OnInit {
     );
     // const { first_name, last_name, mail, password } = this.loginForm.value;
     // this.authService.createAccount(first_name, last_name, mail, password);
-    console.log('onSubmit');
+    // console.log('onSubmit');
   }
 }

@@ -20,11 +20,11 @@ export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  email = new FormControl('', [Validators.required]);
+  mail = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
 
   credentials: TokenPayload = {
-    email: '',
+    mail: '',
     password: '',
   };
 
@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: this.email,
+      mail: this.mail,
       password: this.password,
     });
   }
