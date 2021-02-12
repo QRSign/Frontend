@@ -19,12 +19,22 @@
         <div class="qrcode-creation__time">
           <mat-form-field>
             <mat-label>Heure de début de cours</mat-label>
-            <input matInput [ngxTimepicker]="picker" formControlName="time" />
+            <input
+              matInput
+              [ngxTimepicker]="picker"
+              [format]="24"
+              formControlName="time"
+            />
             <ngx-material-timepicker #picker></ngx-material-timepicker>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Heure de fin de cours</mat-label>
-            <input matInput [ngxTimepicker]="picker2" formControlName="time" />
+            <input
+              matInput
+              [ngxTimepicker]="picker2"
+              [format]="24"
+              formControlName="time"
+            />
             <ngx-material-timepicker #picker2></ngx-material-timepicker>
           </mat-form-field>
         </div>
