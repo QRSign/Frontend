@@ -12,11 +12,12 @@ export class RequestService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  public request(method: 'post' | 'get', type, profil?): Observable<any> {
+  public request(method: 'post' | 'get', type, element?): Observable<any> {
     let base$;
+    console.log(element);
 
     if (method === 'post') {
-      base$ = this.http.post(`${this.API}/${type}`, profil);
+      base$ = this.http.post(`${this.API}/${type}`, element);
     }
     // else {
     //   base$ = this.http.get(`${this.API}/${type}`, {

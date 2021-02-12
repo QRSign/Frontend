@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
@@ -59,6 +60,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatMenuModule,
     NgxMaterialTimepickerModule.setLocale('fr'),
   ],
   providers: [],

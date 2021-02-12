@@ -8,10 +8,14 @@
     </div>
   </div>
   <div class="profile__menu">
-    <!-- <img
-      class="profile__picture__img"
-      src="assets/pic/profile.png"
-      alt="profile"
-    /> -->
+    <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Se deconnecter</span>
+      </button>
+    </mat-menu>
   </div>
 </section>

@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { RequestService } from './request.service';
 
-interface TokenResponse {
-  token: string;
-}
+// interface TokenResponse {
+//   token: string;
+// }
 
 export interface TokenPayload {
   mail: string;
@@ -19,15 +17,9 @@ export interface TokenPayload {
   providedIn: 'root',
 })
 export class AuthService {
-  private API: string = 'http://127.0.0.1:5000';
-  private logged: boolean = false;
   private profil;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private requestService: RequestService
-  ) {}
+  constructor(private router: Router, private requestService: RequestService) {}
 
   // private saveToken(token: string): void {
   //   localStorage.setItem('qrsign-token', token);
@@ -64,6 +56,7 @@ export class AuthService {
 
   public logout(): void {
     // window.localStorage.removeItem('qrsign-token');
+    this.setProfil(undefined);
     this.router.navigateByUrl('/auth');
   }
 }

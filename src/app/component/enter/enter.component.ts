@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
+import { MessageService } from 'src/app/utils/services/message.service';
+import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
 // import { SignService } from 'src/app/utils/services/sign.service';
 
 @Component({
@@ -15,18 +17,28 @@ import SignaturePad from 'signature_pad';
   styleUrls: ['./enter.component.scss'],
 })
 export class EnterComponent implements OnInit {
+  @ViewChild('error', { static: true }) errorElement;
   @ViewChild('sPad', { static: true }) signaturePadElement;
   signaturePad: any;
+  submitButton: string = 'Soumettre';
 
   signForm: FormGroup;
 
-  nom = new FormControl('Mortelier', [Validators.required]);
-  prenom = new FormControl('Antoine', [Validators.required]);
+  nom = new FormControl('', [Validators.required]);
+  prenom = new FormControl('', [Validators.required]);
+
+  formInfos: SignPayload = {
+    nom: '',
+    prenom: '',
+    signature: '',
+    token: '',
+  };
 
   constructor(
     private formBuilder: FormBuilder,
-    // private signService: SignService,
-    private router: Router
+    private signService: SignService,
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +54,10 @@ export class EnterComponent implements OnInit {
     );
   }
 
+  getErrorMessage(type: string = 'default'): string {
+    return this.messageService.getErrorMessage(type);
+  }
+
   clearPad() {
     this.signaturePad.clear();
   }
@@ -54,58 +70,47 @@ export class EnterComponent implements OnInit {
     }
   }
 
-  savePNG() {
-    if (this.signaturePad.isEmpty()) {
-      console.log('Please provide a signature first.');
-    } else {
-      const dataURL = this.signaturePad.toDataURL();
-      this.download(dataURL, 'signature.png');
-      // this.onSubmit();
-    }
-  }
-
-  // onSubmit(): void {
-  //   this.signService.sign(this.signForm.value).subscribe(
-  //     (res) => {
-  //       this.router.navigateByUrl('/');
-  //     },
-  //     (err) => {
-  //       console.error(err);
-  //     }
-  //   );
-  // }
-
-  download(dataURL, filename) {
-    if (
-      navigator.userAgent.indexOf('Safari') > -1 &&
-      navigator.userAgent.indexOf('Chrome') === -1
-    ) {
-      window.open(dataURL);
-    } else {
-      const blob = this.dataURLToBlob(dataURL);
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-
-      document.body.appendChild(a);
-      // Download l'image
-      // a.click();
-
-      window.URL.revokeObjectURL(url);
-    }
-  }
-
-  dataURLToBlob(dataURL) {
+  addSignature(dataURL) {
     const parts = dataURL.split(';base64,');
     this.signForm.value.signature = parts[1];
-    const contentType = parts[0].split(':')[1];
-    const raw = window.atob(parts[1]);
-    const rawLength = raw.length;
-    const uInt8Array = new Uint8Array(rawLength);
-    for (let i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
+  }
+
+  toggleError() {
+    const error = this.errorElement.nativeElement;
+    const parent = error.closest('.custom-button');
+    error.style.opacity = 0;
+    const vm = this;
+    setTimeout(function () {
+      vm.submitButton = 'Signature manquante';
+      error.style.opacity = 1;
+      parent.style.backgroundColor = '#ec6c77';
+    }, 300);
+    setTimeout(function () {
+      error.style.opacity = 0;
+      parent.style.backgroundColor = '#3f51b5';
+    }, 2000);
+    setTimeout(function () {
+      vm.submitButton = 'Soumettre';
+      error.style.opacity = 1;
+    }, 2300);
+  }
+
+  onSubmit(): void {
+    if (this.signaturePad.isEmpty()) {
+      this.toggleError();
+    } else {
+      const dataURL = this.signaturePad.toDataURL();
+      this.addSignature(dataURL);
+      this.formInfos = this.signForm.value;
+      this.signService.sign(this.formInfos).subscribe(
+        (res) => {
+          // this.router.navigateByUrl('/');
+          console.log(res);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
     }
-    return new Blob([uInt8Array], { type: contentType });
   }
 }

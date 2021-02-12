@@ -15,4 +15,8 @@ export class ProfileComponent implements OnInit {
     this.profil = this.authService.getProfil();
     console.log(this.profil);
   }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

@@ -6,6 +6,7 @@
   justify-content: flex-end;
   &__information {
     display: flex;
+    margin-right: 10px;
     &--firstname {
       text-transform: capitalize;
       margin-right: 5px;
