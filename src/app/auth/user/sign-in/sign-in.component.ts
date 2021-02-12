@@ -50,7 +50,7 @@ export class SignInComponent implements OnInit {
     this.credentials = this.loginForm.value;
     this.authService.login(this.credentials).subscribe(
       (res) => {
-        console.log('res', res);
+        this.authService.setProfil(res);
         this.router.navigateByUrl('/');
       },
       (err) => {

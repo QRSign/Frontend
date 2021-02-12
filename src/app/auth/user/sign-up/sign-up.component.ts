@@ -67,7 +67,7 @@ export class SignUpComponent implements OnInit {
     this.credentials = this.loginForm.value;
     this.authService.register(this.credentials).subscribe(
       (res) => {
-        console.log('success', res);
+        this.authService.setProfil(res);
         this.router.navigateByUrl('/');
       },
       (err) => {

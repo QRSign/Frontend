@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
-import { SignService } from 'src/app/utils/services/sign.service';
+// import { SignService } from 'src/app/utils/services/sign.service';
 
 @Component({
   selector: 'app-enter',
@@ -25,7 +25,7 @@ export class EnterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private signService: SignService,
+    // private signService: SignService,
     private router: Router
   ) {}
 
@@ -60,20 +60,20 @@ export class EnterComponent implements OnInit {
     } else {
       const dataURL = this.signaturePad.toDataURL();
       this.download(dataURL, 'signature.png');
-      this.onSubmit();
+      // this.onSubmit();
     }
   }
 
-  onSubmit(): void {
-    this.signService.sign(this.signForm.value).subscribe(
-      (res) => {
-        this.router.navigateByUrl('/');
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
-  }
+  // onSubmit(): void {
+  //   this.signService.sign(this.signForm.value).subscribe(
+  //     (res) => {
+  //       this.router.navigateByUrl('/');
+  //     },
+  //     (err) => {
+  //       console.error(err);
+  //     }
+  //   );
+  // }
 
   download(dataURL, filename) {
     if (

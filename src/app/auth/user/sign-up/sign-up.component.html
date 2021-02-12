@@ -2,9 +2,9 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
     <div class="column-display">
       <div class="sign-up__left-column">
-        <div class="sign-up__lastname">
+        <div class="sign-up__firstname">
           <mat-form-field>
-            <mat-label>Nom</mat-label>
+            <mat-label>Prénom</mat-label>
             <input matInput type="text" formControlName="first_name" />
             <mat-error *ngIf="first_name.invalid">{{
               getErrorMessage("required")
@@ -12,9 +12,9 @@
           </mat-form-field>
         </div>
 
-        <div class="sign-up__firstname">
+        <div class="sign-up__lastname">
           <mat-form-field>
-            <mat-label>Prénom</mat-label>
+            <mat-label>Nom</mat-label>
             <input matInput type="text" formControlName="last_name" />
             <mat-error *ngIf="last_name.invalid">{{
               getErrorMessage("required")

@@ -33,7 +33,6 @@ export class QrcodeCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateAdapter.setLocale('fr');
-    console.log('time', new Date().getTimezoneOffset());
     this.newCourseForm = this.fb.group({
       prof_name: this.prof_name,
       course_name: this.course_name,
