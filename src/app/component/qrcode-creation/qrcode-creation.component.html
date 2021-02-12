@@ -22,6 +22,25 @@
             <input matInput [ngxTimepicker]="picker" formControlName="time" />
             <ngx-material-timepicker #picker></ngx-material-timepicker>
           </mat-form-field>
+          <mat-form-field>
+            <mat-label>Heure de fin de cours</mat-label>
+            <input matInput [ngxTimepicker]="picker2" formControlName="time" />
+            <ngx-material-timepicker #picker2></ngx-material-timepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="qrcode-creation__right-column">
+        <div class="qrcode-creation__name">
+          <mat-form-field>
+            <mat-label>Nom du professeur</mat-label>
+            <input matInput type="text" formControlName="prof_name" />
+          </mat-form-field>
+        </div>
+        <div class="qrcode-creation__name">
+          <mat-form-field>
+            <mat-label>Nom du cours</mat-label>
+            <input matInput type="text" formControlName="course_name" />
+          </mat-form-field>
         </div>
         <div class="qrcode-creation__timer">
           <table class="qrcode-creation__timer--table">
@@ -45,20 +64,6 @@
               </td>
             </tr>
           </table>
-        </div>
-      </div>
-      <div class="qrcode-creation__right-column">
-        <div class="qrcode-creation__name">
-          <mat-form-field>
-            <mat-label>Nom du professeur</mat-label>
-            <input matInput type="text" formControlName="prof_name" />
-          </mat-form-field>
-        </div>
-        <div class="qrcode-creation__name">
-          <mat-form-field>
-            <mat-label>Nom du cours</mat-label>
-            <input matInput type="text" formControlName="course_name" />
-          </mat-form-field>
         </div>
       </div>
     </div>
