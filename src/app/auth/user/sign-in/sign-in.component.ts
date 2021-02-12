@@ -49,7 +49,8 @@ export class SignInComponent implements OnInit {
   onSubmit(): void {
     this.credentials = this.loginForm.value;
     this.authService.login(this.credentials).subscribe(
-      () => {
+      (res) => {
+        console.log('res', res);
         this.router.navigateByUrl('/');
       },
       (err) => {

@@ -66,16 +66,13 @@ export class SignUpComponent implements OnInit {
   onSubmit(): void {
     this.credentials = this.loginForm.value;
     this.authService.register(this.credentials).subscribe(
-      () => {
-        console.log('success');
+      (res) => {
+        console.log('success', res);
         this.router.navigateByUrl('/');
       },
       (err) => {
         console.error(err);
       }
     );
-    // const { first_name, last_name, mail, password } = this.loginForm.value;
-    // this.authService.createAccount(first_name, last_name, mail, password);
-    // console.log('onSubmit');
   }
 }

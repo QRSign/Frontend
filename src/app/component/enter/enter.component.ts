@@ -1,5 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
+import { SignService } from 'src/app/utils/services/sign.service';
 
 @Component({
   selector: 'app-enter',
@@ -10,9 +18,23 @@ export class EnterComponent implements OnInit {
   @ViewChild('sPad', { static: true }) signaturePadElement;
   signaturePad: any;
 
-  constructor() {}
+  signForm: FormGroup;
 
-  ngOnInit(): void {}
+  nom = new FormControl('Mortelier', [Validators.required]);
+  prenom = new FormControl('Antoine', [Validators.required]);
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private signService: SignService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.signForm = this.formBuilder.group({
+      nom: this.nom,
+      prenom: this.prenom,
+    });
+  }
 
   ngAfterViewInit(): void {
     this.signaturePad = new SignaturePad(
@@ -38,7 +60,19 @@ export class EnterComponent implements OnInit {
     } else {
       const dataURL = this.signaturePad.toDataURL();
       this.download(dataURL, 'signature.png');
+      this.onSubmit();
     }
+  }
+
+  onSubmit(): void {
+    this.signService.sign(this.signForm.value).subscribe(
+      (res) => {
+        this.router.navigateByUrl('/');
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   download(dataURL, filename) {
@@ -55,7 +89,8 @@ export class EnterComponent implements OnInit {
       a.download = filename;
 
       document.body.appendChild(a);
-      a.click();
+      // Download l'image
+      // a.click();
 
       window.URL.revokeObjectURL(url);
     }
@@ -63,6 +98,7 @@ export class EnterComponent implements OnInit {
 
   dataURLToBlob(dataURL) {
     const parts = dataURL.split(';base64,');
+    this.signForm.value.signature = parts[1];
     const contentType = parts[0].split(':')[1];
     const raw = window.atob(parts[1]);
     const rawLength = raw.length;
