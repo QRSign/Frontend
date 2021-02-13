@@ -28,6 +28,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { HistoryComponent } from './component/history/history.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     SignUpComponent,
     PasswordValidatorComponent,
     TitleComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatNativeDateModule,
     MatSelectModule,
     MatMenuModule,
+    MatTableModule,
     NgxMaterialTimepickerModule.setLocale('fr'),
   ],
   providers: [],
