@@ -1,48 +1,51 @@
-<section class="enter">
-  <div class="enter__canvas">
-    <form (ngSubmit)="onSubmit()" [formGroup]="signForm">
-      <div class="enter__firstname">
-        <mat-form-field>
-          <mat-label>Prénom</mat-label>
-          <input matInput type="text" formControlName="prenom" />
-          <mat-error *ngIf="prenom.invalid">{{
-            getErrorMessage("required")
-          }}</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="enter__lastname">
-        <mat-form-field>
-          <mat-label>Nom</mat-label>
-          <input matInput type="text" formControlName="nom" />
-          <mat-error *ngIf="nom.invalid">{{
-            getErrorMessage("required")
-          }}</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="canvas">
-        <canvas #sPad width="450" height="300" class="canvas__box"></canvas>
-      </div>
-      <div class="enter__edit">
-        <button
-          type="button"
-          mat-raised-button
-          class="custom-button"
-          (click)="clearPad()"
-        >
-          Supprimer
+<mat-card class="sign-card">
+  <mat-card-title>Signature</mat-card-title>
+  <section class="enter">
+    <div class="enter__canvas">
+      <form (ngSubmit)="onSubmit()" [formGroup]="signForm">
+        <div class="enter__firstname">
+          <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input matInput type="text" formControlName="prenom" />
+            <mat-error *ngIf="prenom.invalid">{{
+              getErrorMessage("required")
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="enter__lastname">
+          <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input matInput type="text" formControlName="nom" />
+            <mat-error *ngIf="nom.invalid">{{
+              getErrorMessage("required")
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="canvas">
+          <canvas #sPad width="450" height="300" class="canvas__box"></canvas>
+        </div>
+        <div class="enter__edit">
+          <button
+            type="button"
+            mat-raised-button
+            class="custom-button"
+            (click)="clearPad()"
+          >
+            Supprimer
+          </button>
+          <button
+            type="button"
+            mat-raised-button
+            class="custom-button"
+            (click)="undoPad()"
+          >
+            Refaire
+          </button>
+        </div>
+        <button type="submit" mat-raised-button class="custom-button">
+          <div class="submit-button" #error>{{ submitButton }}</div>
         </button>
-        <button
-          type="button"
-          mat-raised-button
-          class="custom-button"
-          (click)="undoPad()"
-        >
-          Refaire
-        </button>
-      </div>
-      <button type="submit" mat-raised-button class="custom-button">
-        <div class="submit-button" #error>{{ submitButton }}</div>
-      </button>
-    </form>
-  </div>
-</section>
+      </form>
+    </div>
+  </section>
+</mat-card>
