@@ -30,6 +30,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { HistoryComponent } from './component/history/history.component';
 import { MatTableModule } from '@angular/material/table';
+import { ShowQrcodeComponent } from './component/show-qrcode/show-qrcode.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { MatTableModule } from '@angular/material/table';
     PasswordValidatorComponent,
     TitleComponent,
     HistoryComponent,
+    ShowQrcodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     MatMenuModule,
     MatTableModule,
+    MatCardModule,
     NgxMaterialTimepickerModule.setLocale('fr'),
   ],
   providers: [],

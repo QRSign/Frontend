@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
+  Date: string;
+  Cours: string;
+  PDF: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { Date: '13/02/2021', Cours: 'Ux Design', PDF: 1.0079 },
-  { Date: '12/02/2021', Cours: 'Methodologie de recherche', PDF: 4.0026 },
-  { Date: '11/02/2021', Cours: 'DevOps', PDF: 6.941 },
+  { Date: '13/02/2021', Cours: 'Ux Design', PDF: 'Ux Design' },
+  { Date: '12/02/2021', Cours: 'Methodologie de recherche', PDF: 'Ux Design' },
+  { Date: '11/02/2021', Cours: 'DevOps', PDF: 'Ux Design' },
 ];
 
 @Component({
