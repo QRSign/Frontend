@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
 import { MessageService } from 'src/app/utils/services/message.service';
 import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
@@ -24,12 +23,12 @@ export class EnterComponent implements OnInit {
 
   signForm: FormGroup;
 
-  nom = new FormControl('', [Validators.required]);
-  prenom = new FormControl('', [Validators.required]);
+  last_name = new FormControl('', [Validators.required]);
+  first_name = new FormControl('', [Validators.required]);
 
   formInfos: SignPayload = {
-    nom: '',
-    prenom: '',
+    last_name: '',
+    first_name: '',
     signature: '',
     token: '',
   };
@@ -37,14 +36,13 @@ export class EnterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private signService: SignService,
-    private router: Router,
     private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.signForm = this.formBuilder.group({
-      nom: this.nom,
-      prenom: this.prenom,
+      last_name: this.last_name,
+      first_name: this.first_name,
     });
   }
 
@@ -102,6 +100,7 @@ export class EnterComponent implements OnInit {
       const dataURL = this.signaturePad.toDataURL();
       this.addSignature(dataURL);
       this.formInfos = this.signForm.value;
+      console.log(this.formInfos);
       this.signService.sign(this.formInfos).subscribe(
         (res) => {
           // this.router.navigateByUrl('/');

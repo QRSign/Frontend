@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { RequestService } from './request.service';
 
 export interface SignPayload {
-  nom: string;
-  prenom: string;
+  last_name: string;
+  first_name: string;
   signature: string;
   token: string;
 }

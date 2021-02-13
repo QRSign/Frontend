@@ -13,6 +13,10 @@
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="logout()">
+        <mat-icon>history</mat-icon>
+        <span>Historique des cours</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Se deconnecter</span>
       </button>

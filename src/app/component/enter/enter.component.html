@@ -4,8 +4,8 @@
       <div class="enter__firstname">
         <mat-form-field>
           <mat-label>Prénom</mat-label>
-          <input matInput type="text" formControlName="prenom" />
-          <mat-error *ngIf="prenom.invalid">{{
+          <input matInput type="text" formControlName="first_name" />
+          <mat-error *ngIf="first_name.invalid">{{
             getErrorMessage("required")
           }}</mat-error>
         </mat-form-field>
@@ -13,8 +13,8 @@
       <div class="enter__lastname">
         <mat-form-field>
           <mat-label>Nom</mat-label>
-          <input matInput type="text" formControlName="nom" />
-          <mat-error *ngIf="nom.invalid">{{
+          <input matInput type="text" formControlName="last_name" />
+          <mat-error *ngIf="last_name.invalid">{{
             getErrorMessage("required")
           }}</mat-error>
         </mat-form-field>
@@ -40,7 +40,12 @@
           Refaire
         </button>
       </div>
-      <button type="submit" mat-raised-button class="custom-button">
+      <button
+        type="submit"
+        [disabled]="!signForm.valid"
+        mat-raised-button
+        class="custom-button"
+      >
         <div class="submit-button" #error>{{ submitButton }}</div>
       </button>
     </form>

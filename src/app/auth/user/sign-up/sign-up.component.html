@@ -91,6 +91,7 @@
     <button
       type="submit"
       mat-raised-button
+      [disabled]="!loginForm.valid"
       class="custom-button sign-in__button"
     >
       Créer un compte
