@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   logout(): void {
     this.authService.logout();
   }
-  navigate(): void {
-    this.router.navigateByUrl('/history');
+  navigate(value = ''): void {
+    this.router.navigate(['/', value]);
   }
 }
