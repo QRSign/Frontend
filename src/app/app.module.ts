@@ -34,6 +34,7 @@ import { ShowQrcodeComponent } from './component/show-qrcode/show-qrcode.compone
 import { MatCardModule } from '@angular/material/card';
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrcodeComponentComponent } from './component/qrcode-component/qrcode-component.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { QrcodeComponentComponent } from './component/qrcode-component/qrcode-co
     HistoryComponent,
     ShowQrcodeComponent,
     QrcodeComponentComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
