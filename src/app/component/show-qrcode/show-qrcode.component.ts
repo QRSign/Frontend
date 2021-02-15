@@ -34,10 +34,6 @@ export class ShowQrcodeComponent implements OnInit {
     this.onChange();
   }
 
-  test() {
-    console.log('tab', this.students);
-  }
-
   onChange(): void {
     const vm = this;
     setInterval(() => vm.getStudents(), 5000);
@@ -47,10 +43,8 @@ export class ShowQrcodeComponent implements OnInit {
     this.hasStudents(this.token).subscribe(
       (res) => {
         this.students = res;
-        console.log(res);
-        this.test();
       },
-      (err) => console.log(err)
+      (err) => console.error(err)
     );
   }
 
