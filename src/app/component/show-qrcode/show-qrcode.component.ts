@@ -35,7 +35,38 @@ export class ShowQrcodeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkValidRoute();
+    // this.checkValidRoute();
+    this.onChange();
+  }
+
+  onChange(): void {
+    this.subscriptions.push(
+      this.route.paramMap.subscribe((param) => {
+        const token = param.get('token');
+        this.getStudents(token).subscribe(
+          (res) => {
+            console.log(res);
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
+      })
+    );
+  }
+  getStudents(token: string): Observable<any> {
+    // setInterval(this.onChange, 3000);
+    // return this.requestService.request('get', ['signature', 'qrcode', token]);
+    // var jsonTest = {
+    //   first_name: 'Antereoine',
+    //   id: 5,
+    //   last_name: 'MOrteleeier',
+    //   signature: 'iVBORw0KGgoAAAANSUhEUgAAAcIAAAEsCAYAAABQVrO3AAAgAE',
+    //   token: 'f1e8a0fd',
+    // };
+    // jsonTest = JSON.stringify(jsonTest);
+    // return jsonTest;
+    return null;
   }
 
   ngOnDestroy(): void {
