@@ -1,4 +1,4 @@
-<section class="profile">
+<!-- <section class="profile">
   <div class="profile__information">
     <div class="profile__information--firstname">
       {{ profil.first_name }}
@@ -12,7 +12,15 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="navigate()">
+   <button mat-menu-item (click)="navigate()">
+        <mat-icon>class</mat-icon>
+        <span>Création de cours</span>
+      </button>
+      <button mat-menu-item (click)="navigate('qrcode')">
+        <mat-icon>qr_code_2</mat-icon>
+        <span>Qrcode</span>
+      </button>
+      <button mat-menu-item (click)="navigate('history')">
         <mat-icon>history</mat-icon>
         <span>Historique</span>
       </button>
@@ -22,8 +30,8 @@
       </button>
     </mat-menu>
   </div>
-</section>
-<!-- <section class="profile">
+</section> -->
+<section class="profile">
   <div class="profile__information">
     <div class="profile__information--firstname">Logan</div>
     <div class="profile__information--lastname">Chenavier</div>
@@ -34,6 +42,14 @@
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="navigate()">
+        <mat-icon>class</mat-icon>
+        <span>Création de cours</span>
+      </button>
+      <button mat-menu-item (click)="navigate('qrcode')">
+        <mat-icon>qr_code_2</mat-icon>
+        <span>Qrcode</span>
+      </button>
+      <button mat-menu-item (click)="navigate('history')">
         <mat-icon>history</mat-icon>
         <span>Historique</span>
       </button>
@@ -43,4 +59,4 @@
       </button>
     </mat-menu>
   </div>
-</section>  -->
+</section>
