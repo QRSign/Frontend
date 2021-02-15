@@ -11,34 +11,62 @@
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
+
     <mat-menu #menu="matMenu" xPosition="before">
       <button mat-menu-item (click)="navigate()">
         <mat-icon>class</mat-icon>
         <span>Création de cours</span>
       </button>
+
       <button
         mat-menu-item
         [disabled]="courses.length == 0"
-        (click)="navigate('qrcode')"
         [matMenuTriggerFor]="cours"
       >
         <mat-icon>qr_code_2</mat-icon>
         <span>Cours</span>
       </button>
-      <button mat-menu-item (click)="navigate('history')">
+
+      <button
+        mat-menu-item
+        [disabled]="passedCourses.length == 0"
+        [matMenuTriggerFor]="historical"
+      >
         <mat-icon>history</mat-icon>
         <span>Historique</span>
       </button>
+
       <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Se deconnecter</span>
       </button>
     </mat-menu>
 
-    <mat-menu class="courses-menu" #cours="matMenu" xPosition="before">
+    <!-- Current or futur courses -->
+    <mat-menu class="sub-menu" #cours="matMenu" xPosition="before">
       <button
-        class="courses-menu__button"
+        class="sub-menu__button"
         *ngFor="let course of courses"
+        mat-menu-item
+        (mouseenter)="onHover($event)"
+        (mouseleave)="onLeave($event)"
+      >
+        <mat-icon class="icon delete">delete</mat-icon>
+        <mat-icon class="icon go" (click)="navigateToCourse(course.token)"
+          >forward</mat-icon
+        >
+        <span class="title">
+          <span class="title__course">{{ course.title }} :</span>
+          {{ formatDate(course.start_time) }}
+        </span>
+      </button>
+    </mat-menu>
+
+    <!-- Previous courses -->
+    <mat-menu class="sub-menu" #historical="matMenu" xPosition="before">
+      <button
+        class="sub-menu__button"
+        *ngFor="let course of passedCourses"
         mat-menu-item
         (mouseenter)="onHover($event)"
         (mouseleave)="onLeave($event)"

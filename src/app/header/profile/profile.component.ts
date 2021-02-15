@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/utils/services/auth.service';
 export class ProfileComponent implements OnInit {
   @Input() profil;
   courses = [];
+  passedCourses = [];
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,16 +24,20 @@ export class ProfileComponent implements OnInit {
   }
 
   getCourses(result): void {
-    this.courses = result;
-    console.log(this.courses);
+    const today = new Date();
+    result.forEach((element) => {
+      new Date(element.end_time) < today
+        ? this.passedCourses.push(element)
+        : this.courses.push(element);
+    });
   }
 
   logout(): void {
     this.authService.logout();
   }
 
-  navigate(value = ''): void {
-    this.router.navigate(['/', value]);
+  navigate(value?): void {
+    value ? this.router.navigate(['/', value]) : this.router.navigateByUrl('/');
   }
 
   navigateToCourse(token): void {
