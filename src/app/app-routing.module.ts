@@ -8,6 +8,7 @@ import { HistoryComponent } from './component/history/history.component';
 import { AuthGuard } from './utils/guard/auth.guard';
 import { ShowQrcodeComponent } from './component/show-qrcode/show-qrcode.component';
 import { QrcodeComponentComponent } from './component/qrcode-component/qrcode-component.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'auth', component: UserComponent },
@@ -38,11 +39,15 @@ const routes: Routes = [
         path: 'history',
         component: HistoryComponent,
       },
-      {
-        path: '**',
-        redirectTo: '',
-      },
     ],
+  },
+  {
+    path: '404',
+    component: NotFoundComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '/404',
   },
 ];
 

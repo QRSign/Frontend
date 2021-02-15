@@ -21,20 +21,28 @@ export class AuthService {
 
   constructor(private router: Router, private requestService: RequestService) {}
 
-  // private saveToken(token: string): void {
-  //   localStorage.setItem('qrsign-token', token);
-  //   this.token = token;
-  // }
-
-  // private getToken(): string {
-  //   if (!this.token) {
-  //     this.token = localStorage.getItem('qrsign-token');
-  //   }
-  //   return this.token;
-  // }
+  mytest;
 
   public getProfil() {
     return this.profil;
+  }
+
+  public getCourses(thisClass, callBack) {
+    this.hasCourses(this.profil.id).subscribe(
+      (res) => {
+        const result = res.filter((course) => course.user == this.profil.id);
+        const call = callBack.bind(thisClass);
+        call(result);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+    return null;
+  }
+
+  public hasCourses(id): Observable<any> {
+    return this.requestService.request('get', ['qrcodes']);
   }
 
   public setProfil(profil) {
@@ -42,7 +50,6 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    // return this.profil ? this.profil.exp > Date.now() / 1000 : false;
     return this.profil ? true : false;
   }
 
@@ -55,12 +62,7 @@ export class AuthService {
   }
 
   public logout(): void {
-    // window.localStorage.removeItem('qrsign-token');
     this.setProfil(undefined);
     this.router.navigateByUrl('/auth');
-  }
-
-  public hasCourses(id): Observable<any> {
-    return this.requestService.request('get', ['qrcodes']);
   }
 }

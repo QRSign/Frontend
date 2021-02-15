@@ -28,3 +28,35 @@
     }
   }
 }
+
+.courses-menu {
+  &__button {
+    transition-duration: 150ms;
+    .icon {
+      opacity: 0.3;
+      transition-duration: 150ms;
+      &.delete {
+        &:hover {
+          color: $alert;
+        }
+      }
+      &.go {
+        &:hover {
+          color: $blue;
+        }
+      }
+    }
+
+    .title {
+      &__course {
+        font-weight: bold;
+      }
+    }
+
+    &.over {
+      .icon {
+        opacity: 1;
+      }
+    }
+  }
+}
