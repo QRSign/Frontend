@@ -7,6 +7,7 @@ import { QrcodeCreationComponent } from './component/qrcode-creation/qrcode-crea
 import { HistoryComponent } from './component/history/history.component';
 import { AuthGuard } from './utils/guard/auth.guard';
 import { ShowQrcodeComponent } from './component/show-qrcode/show-qrcode.component';
+import { QrcodeComponentComponent } from './component/qrcode-component/qrcode-component.component';
 
 const routes: Routes = [
   { path: 'auth', component: UserComponent },
@@ -25,7 +26,13 @@ const routes: Routes = [
       },
       {
         path: 'qrcode',
-        component: ShowQrcodeComponent,
+        component: QrcodeComponentComponent,
+        children: [
+          {
+            path: ':token',
+            component: ShowQrcodeComponent,
+          },
+        ],
       },
       {
         path: 'history',

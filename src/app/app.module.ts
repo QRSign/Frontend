@@ -33,6 +33,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ShowQrcodeComponent } from './component/show-qrcode/show-qrcode.component';
 import { MatCardModule } from '@angular/material/card';
 import { QRCodeModule } from 'angularx-qrcode';
+import { QrcodeComponentComponent } from './component/qrcode-component/qrcode-component.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     TitleComponent,
     HistoryComponent,
     ShowQrcodeComponent,
+    QrcodeComponentComponent,
   ],
   imports: [
     BrowserModule,

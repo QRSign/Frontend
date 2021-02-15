@@ -16,6 +16,6 @@ export class CreationService {
   constructor(private requestService: RequestService) {}
 
   public create(course: CreationCoursPayload): Observable<any> {
-    return this.requestService.request('post', 'qrcode', course);
+    return this.requestService.request('post', ['qrcode'], course);
   }
 }
