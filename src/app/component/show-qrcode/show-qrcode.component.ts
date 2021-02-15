@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 export interface PeriodicElement {
-  surname: string;
-  name: string;
+  last_name: string;
+  first_name: string;
 }
 const ELEMENT_DATA: PeriodicElement[] = [
-  { surname: 'Dutoit', name: 'Antoine' },
-  { surname: 'Fontaine', name: 'Nicolas' },
-  { surname: 'Pascqualini', name: 'Lamya' },
+  { last_name: 'Dutoit', first_name: 'Antoine' },
+  { last_name: 'Fontaine', first_name: 'Nicolas' },
+  { last_name: 'Pascqualini', first_name: 'Lamya' },
 ];
 
 @Component({
@@ -18,12 +18,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ShowQrcodeComponent implements OnInit {
   displayedColumns: string[] = ['Noms', 'Prénoms'];
   dataSource = ELEMENT_DATA;
-  public myAngularxQrCode: string = null;
+  public qrLink: string =
+    'https://material.io/resources/icons/?search=class&style=baseline';
 
-  constructor() {
-    this.myAngularxQrCode =
-      'https://material.io/resources/icons/?search=class&style=baseline';
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }
