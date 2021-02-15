@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   last_name: string;
@@ -21,7 +22,14 @@ export class ShowQrcodeComponent implements OnInit {
   public qrLink: string =
     'https://material.io/resources/icons/?search=class&style=baseline';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onChange();
+  }
+
+  onChange(): void {
+    alert('Hello');
+    // setInterval(this.onChange, 3000);
+  }
 }

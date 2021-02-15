@@ -1,15 +1,17 @@
-<mat-card class="example-card">
+<mat-card (load)="onChange()" class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>Ux Design</mat-card-title>
     <mat-card-subtitle>Galimede</mat-card-subtitle>
   </mat-card-header>
-  <qrcode
-    [qrdata]="qrLink"
-    [width]="600"
-    [errorCorrectionLevel]="'M'"
-    [elementType]="'svg'"
-  ></qrcode>
+  <section class="center-qrcode">
+    <qrcode
+      [qrdata]="qrLink"
+      [width]="450"
+      [errorCorrectionLevel]="'M'"
+      [elementType]="'svg'"
+    ></qrcode>
+  </section>
 </mat-card>
 
 <mat-card class="example-card">
