@@ -1,16 +1,17 @@
 @import "src/stylesheets/styles";
 
 .header {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: $black-light;
-    color: $white;
-    height: 100px;
-    &__content {
-        width: 100%;
-    }
+  position: fixed;
+  display: flex;
+  z-index: 100;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $black-light;
+  color: $white;
+  height: 100px;
+  &__content {
+    width: 100%;
+  }
 }
