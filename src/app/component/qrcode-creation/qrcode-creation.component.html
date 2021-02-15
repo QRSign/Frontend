@@ -16,17 +16,13 @@
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="qrcode-creation__time">
+        <div class="qrcode-creation__time--begin">
           <mat-form-field>
             <mat-label>Heure de début de cours</mat-label>
-            <input
-              matInput
-              [ngxTimepicker]="picker"
-              [format]="24"
-              formControlName="time"
-            />
-            <ngx-material-timepicker #picker></ngx-material-timepicker>
+            <input matInput type="time" formControlName="time" />
           </mat-form-field>
+        </div>
+        <!-- <div class="qrcode-creation__time--end">
           <mat-form-field>
             <mat-label>Heure de fin de cours</mat-label>
             <input
@@ -37,15 +33,9 @@
             />
             <ngx-material-timepicker #picker2></ngx-material-timepicker>
           </mat-form-field>
-        </div>
+        </div> -->
       </div>
       <div class="qrcode-creation__right-column">
-        <div class="qrcode-creation__name">
-          <mat-form-field>
-            <mat-label>Nom du professeur</mat-label>
-            <input matInput type="text" formControlName="prof_name" />
-          </mat-form-field>
-        </div>
         <div class="qrcode-creation__name">
           <mat-form-field>
             <mat-label>Nom du cours</mat-label>
@@ -58,7 +48,12 @@
               <td>
                 <mat-form-field>
                   <mat-label>Temps accordé pour valider la présence</mat-label>
-                  <input matInput type="text" formControlName="timer" />
+                  <input
+                    matInput
+                    type="number"
+                    [min]="0"
+                    formControlName="timer"
+                  />
                 </mat-form-field>
               </td>
               <td>
@@ -79,6 +74,7 @@
     </div>
     <button
       type="submit"
+      [disabled]="!newCourseForm.valid"
       mat-raised-button
       class="custom-button qrcode-creation__button"
     >

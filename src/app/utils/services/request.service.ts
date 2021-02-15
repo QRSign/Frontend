@@ -14,7 +14,6 @@ export class RequestService {
 
   public request(method: 'post' | 'get', type, element?): Observable<any> {
     let base$;
-    console.log(element);
 
     if (method === 'post') {
       base$ = this.http.post(`${this.API}/${type}`, element);

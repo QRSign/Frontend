@@ -1,51 +1,53 @@
-<mat-card class="sign-card">
-  <mat-card-title>Signature</mat-card-title>
-  <section class="enter">
-    <div class="enter__canvas">
-      <form (ngSubmit)="onSubmit()" [formGroup]="signForm">
-        <div class="enter__firstname">
-          <mat-form-field>
-            <mat-label>Prénom</mat-label>
-            <input matInput type="text" formControlName="prenom" />
-            <mat-error *ngIf="prenom.invalid">{{
-              getErrorMessage("required")
-            }}</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="enter__lastname">
-          <mat-form-field>
-            <mat-label>Nom</mat-label>
-            <input matInput type="text" formControlName="nom" />
-            <mat-error *ngIf="nom.invalid">{{
-              getErrorMessage("required")
-            }}</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="canvas">
-          <canvas #sPad width="450" height="300" class="canvas__box"></canvas>
-        </div>
-        <div class="enter__edit">
-          <button
-            type="button"
-            mat-raised-button
-            class="custom-button"
-            (click)="clearPad()"
-          >
-            Supprimer
-          </button>
-          <button
-            type="button"
-            mat-raised-button
-            class="custom-button"
-            (click)="undoPad()"
-          >
-            Refaire
-          </button>
-        </div>
-        <button type="submit" mat-raised-button class="custom-button">
-          <div class="submit-button" #error>{{ submitButton }}</div>
+<section class="enter">
+  <div class="enter__canvas">
+    <form (ngSubmit)="onSubmit()" [formGroup]="signForm">
+      <div class="enter__firstname">
+        <mat-form-field>
+          <mat-label>Prénom</mat-label>
+          <input matInput type="text" formControlName="first_name" />
+          <mat-error *ngIf="first_name.invalid">{{
+            getErrorMessage("required")
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="enter__lastname">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input matInput type="text" formControlName="last_name" />
+          <mat-error *ngIf="last_name.invalid">{{
+            getErrorMessage("required")
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="canvas">
+        <canvas #sPad width="450" height="300" class="canvas__box"></canvas>
+      </div>
+      <div class="enter__edit">
+        <button
+          type="button"
+          mat-raised-button
+          class="custom-button"
+          (click)="clearPad()"
+        >
+          Supprimer
         </button>
-      </form>
-    </div>
-  </section>
-</mat-card>
+        <button
+          type="button"
+          mat-raised-button
+          class="custom-button"
+          (click)="undoPad()"
+        >
+          Refaire
+        </button>
+      </div>
+      <button
+        type="submit"
+        [disabled]="!signForm.valid"
+        mat-raised-button
+        class="custom-button"
+      >
+        <div class="submit-button" #error>{{ submitButton }}</div>
+      </button>
+    </form>
+  </div>
+</section>

@@ -5,8 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { DateAdapter } from '@angular/material/core';
+import { AuthService } from 'src/app/utils/services/auth.service';
+import {
+  CreationCoursPayload,
+  CreationService,
+} from 'src/app/utils/services/creation.service';
 
 @Component({
   selector: 'app-qrcode-creation',
@@ -18,23 +22,40 @@ export class QrcodeCreationComponent implements OnInit {
   now: Date = new Date();
 
   newCourseForm: FormGroup;
-  prof_name = new FormControl('', [Validators.required]);
   course_name = new FormControl('', [Validators.required]);
   date = new FormControl(this.now);
-  time = new FormControl('', [Validators.required]);
+  time = new FormControl(
+    `${
+      ('' + this.now.getHours()).length < 2
+        ? '0' + this.now.getHours()
+        : this.now.getHours()
+    }:${
+      ('' + this.now.getMinutes()).length < 2
+        ? '0' + this.now.getMinutes()
+        : this.now.getMinutes()
+    }`,
+    [Validators.required]
+  );
   timer = new FormControl('30', [Validators.required]);
   timeUnity = new FormControl('min', [Validators.required]);
 
+  coursCreationInfos: CreationCoursPayload = {
+    title: '', // "DevOps2"
+    user: 0, // "1"
+    start_time: '', // "1999-07-11 10:30"
+    end_time: '', // "1999-07-11 10:35"
+  };
+
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private dateAdapter: DateAdapter<Date>
+    private dateAdapter: DateAdapter<Date>,
+    private authService: AuthService,
+    private creationService: CreationService
   ) {}
 
   ngOnInit(): void {
     this.dateAdapter.setLocale('fr');
     this.newCourseForm = this.fb.group({
-      prof_name: this.prof_name,
       course_name: this.course_name,
       date: this.date,
       time: this.time,
@@ -43,7 +64,65 @@ export class QrcodeCreationComponent implements OnInit {
     });
   }
 
+  format(): void {
+    const title = this.newCourseForm.value.course_name;
+    const user = this.authService.getProfil().id;
+    const start_time = this.formatDateTime(this.newCourseForm.value.date);
+    const end_time = this.formatDateTime(
+      this.newCourseForm.value.date,
+      this.newCourseForm.value.timer
+    );
+
+    this.coursCreationInfos = {
+      title: title,
+      user: user,
+      start_time: start_time,
+      end_time: end_time,
+    };
+  }
+
+  formatDateTime(dateToFormat: Date, timeToAdd = 0) {
+    const validity =
+      this.newCourseForm.value.timeUnity == 'min'
+        ? parseInt('' + timeToAdd)
+        : 60 * parseInt('' + timeToAdd);
+    const time = this.newCourseForm.value.time;
+    const date = dateToFormat.toLocaleDateString().split('/');
+    const year = date[2];
+    const month = date[1];
+    const day = date[0];
+    const tempDate = `${year}-${month}-${day} ${time}`;
+
+    const newDate = new Date(tempDate);
+    const minutes = newDate.getMinutes();
+    newDate.setMinutes(minutes + validity);
+    const newTime = `${
+      ('' + newDate.getHours()).length < 2
+        ? '0' + newDate.getHours()
+        : newDate.getHours()
+    }:${
+      ('' + newDate.getMinutes()).length < 2
+        ? '0' + newDate.getMinutes()
+        : newDate.getMinutes()
+    }`;
+
+    const res = newDate.toLocaleDateString().split('/');
+    const newYear = res[2];
+    const newMonth = res[1];
+    const newDay = res[0];
+
+    return `${newYear}-${newMonth}-${newDay} ${newTime}`;
+  }
+
   onSubmit(): void {
-    console.log(this.newCourseForm.value);
+    this.format();
+    this.creationService.create(this.coursCreationInfos).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 }
