@@ -1,44 +1,50 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Ux Design</mat-card-title>
-    <mat-card-subtitle>Galimede</mat-card-subtitle>
-  </mat-card-header>
-  <section class="center-qrcode">
-    <qrcode
-      [qrdata]="qrLink"
-      [width]="450"
-      [errorCorrectionLevel]="'M'"
-      [elementType]="'svg'"
-    ></qrcode>
-  </section>
-</mat-card>
+<section *ngIf="!unfoundRoute; else unfound" class="show-qrcode">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Ux Design</mat-card-title>
+      <mat-card-subtitle>Galimede</mat-card-subtitle>
+    </mat-card-header>
+    <section class="center-qrcode">
+      <qrcode
+        [qrdata]="qrLink"
+        [width]="450"
+        [errorCorrectionLevel]="'M'"
+        [elementType]="'svg'"
+      ></qrcode>
+    </section>
+  </mat-card>
 
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>Élèves connectés</mat-card-title>
-  </mat-card-header>
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="mat-elevation-z8 tableQrcode"
-  >
-    <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Élèves connectés</mat-card-title>
+    </mat-card-header>
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8 tableQrcode"
+    >
+      <!--- Note that these columns can be defined in any order.
+    The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="Noms">
-      <th mat-header-cell *matHeaderCellDef>Nom</th>
-      <td mat-cell *matCellDef="let element">{{ element.last_name }}</td>
-    </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="Noms">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let element">{{ element.last_name }}</td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="Prénoms">
-      <th mat-header-cell *matHeaderCellDef>Prénom</th>
-      <td mat-cell *matCellDef="let element">{{ element.first_name }}</td>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="Prénoms">
+        <th mat-header-cell *matHeaderCellDef>Prénom</th>
+        <td mat-cell *matCellDef="let element">{{ element.first_name }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-</mat-card>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card>
+</section>
+
+<ng-template #unfound>
+  <app-not-found></app-not-found>
+</ng-template>

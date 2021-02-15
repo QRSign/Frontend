@@ -47,10 +47,10 @@ export class ShowQrcodeComponent implements OnInit {
         const token = param.get('token');
         this.getToken(token).subscribe(
           (res) => {
-            this.unfoundRoute = true;
+            // this.router.navigateByUrl('/');
           },
           (err) => {
-            this.router.navigateByUrl('/');
+            this.unfoundRoute = true;
             console.error(err);
           }
         );
