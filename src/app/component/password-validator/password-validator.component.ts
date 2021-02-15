@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-password-validator',
@@ -8,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 export class PasswordValidatorComponent implements OnInit {
   numberCharRegex = new RegExp('.{8,}');
   letterNumberRegex = new RegExp('(?=.*[a-zA-Z])(?=.*[0-9]).+');
-  specialCharRegex = new RegExp('(?=.*[!@#$%&]).+');
+
+  private _onChange: string;
+  @Input() set onChange(value: string) {
+    this._onChange = value;
+  }
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  checkNbreChar(): boolean {
+    return this.numberCharRegex.test(this._onChange);
+  }
+
+  checkWantedChar(): boolean {
+    return this.letterNumberRegex.test(this._onChange);
+  }
 }

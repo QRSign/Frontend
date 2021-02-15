@@ -10,9 +10,6 @@
             type="mail"
             placeholder="prenom.nom@lacatholille.fr"
           />
-          <mat-error *ngIf="mail.invalid">{{
-            getErrorMessage("mail")
-          }}</mat-error>
         </mat-form-field>
       </div>
 
@@ -32,9 +29,6 @@
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
-          <mat-error *ngIf="password.invalid">{{
-            getErrorMessage("password")
-          }}</mat-error>
         </mat-form-field>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { MessageService } from 'src/app/utils/services/message.service';
 import {
   emailValidator,
   samePassword,
+  passwordValidator,
 } from 'src/app/utils/services/validator.service';
 
 @Component({
@@ -25,11 +26,11 @@ export class SignUpComponent implements OnInit {
   first_name = new FormControl('', [Validators.required]);
   last_name = new FormControl('', [Validators.required]);
   mail = new FormControl('', [Validators.required, emailValidator()]);
-  password = new FormControl('', [Validators.required]);
-  // password_confirmation = new FormControl('', [
-  //   Validators.required,
-  //   samePassword(this.password),
-  // ]);
+  password = new FormControl('', [Validators.required, passwordValidator()]);
+  password_confirmation = new FormControl('', [
+    Validators.required,
+    samePassword(this.password),
+  ]);
 
   credentials: TokenPayload = {
     first_name: '',
@@ -51,7 +52,7 @@ export class SignUpComponent implements OnInit {
       last_name: this.last_name,
       mail: this.mail,
       password: this.password,
-      // password_confirmation: this.password_confirmation,
+      password_confirmation: this.password_confirmation,
     });
   }
 

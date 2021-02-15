@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 
 const _defaultErrorMessages = {
   required: () => `Ce champ est obligatoire`,
-  email: () => `Ce format d'email n'est pas valide`,
+  mail: () => `Ce format d'email n'est pas valide`,
   password: () =>
     `Le mot de passe doit contenir au moins 8 caractères, 1 lettre et 1 chiffre`,
   password_confirmation: () => `Les mots de passe ne sont pas identiques`,
