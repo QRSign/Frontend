@@ -32,6 +32,7 @@ import { HistoryComponent } from './component/history/history.component';
 import { MatTableModule } from '@angular/material/table';
 import { ShowQrcodeComponent } from './component/show-qrcode/show-qrcode.component';
 import { MatCardModule } from '@angular/material/card';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatCardModule } from '@angular/material/card';
     MatTableModule,
     MatCardModule,
     NgxMaterialTimepickerModule.setLocale('fr'),
+    QRCodeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

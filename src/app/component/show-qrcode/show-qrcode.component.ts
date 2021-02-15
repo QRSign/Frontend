@@ -18,7 +18,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ShowQrcodeComponent implements OnInit {
   displayedColumns: string[] = ['Noms', 'Prénoms'];
   dataSource = ELEMENT_DATA;
-  constructor() {}
+  public myAngularxQrCode: string = null;
+
+  constructor() {
+    this.myAngularxQrCode =
+      'https://material.io/resources/icons/?search=class&style=baseline';
+  }
 
   ngOnInit(): void {}
 }

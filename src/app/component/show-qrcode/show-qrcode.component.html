@@ -4,11 +4,13 @@
     <mat-card-title>Ux Design</mat-card-title>
     <mat-card-subtitle>Galimede</mat-card-subtitle>
   </mat-card-header>
-  <img
-    mat-card-image
-    src="https://upload.wikimedia.org/wikipedia/commons/3/31/QR_icon.svg"
-  />
+  <qrcode
+    [qrdata]="myAngularxQrCode"
+    [width]="256"
+    [errorCorrectionLevel]="'M'"
+  ></qrcode>
 </mat-card>
+
 <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title>Élèves connectés</mat-card-title>
