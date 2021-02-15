@@ -59,4 +59,8 @@ export class AuthService {
     this.setProfil(undefined);
     this.router.navigateByUrl('/auth');
   }
+
+  public hasCourses(id): Observable<any> {
+    return this.requestService.request('get', ['qrcodes']);
+  }
 }

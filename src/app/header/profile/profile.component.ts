@@ -9,16 +9,30 @@ import { AuthService } from 'src/app/utils/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
   @Input() profil;
+  hasCourse: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.profil = this.authService.getProfil();
+    this.handleCourse();
+  }
+
+  handleCourse(): void {
+    this.authService.hasCourses(this.profil.id).subscribe(
+      (res) => {
+        res.map((course) => console.log(course));
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   logout(): void {
     this.authService.logout();
   }
+
   navigate(value = ''): void {
     this.router.navigate(['/', value]);
   }
