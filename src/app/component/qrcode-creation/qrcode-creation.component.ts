@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import {
   CreationCoursPayload,
@@ -50,7 +51,8 @@ export class QrcodeCreationComponent implements OnInit {
     private fb: FormBuilder,
     private dateAdapter: DateAdapter<Date>,
     private authService: AuthService,
-    private creationService: CreationService
+    private creationService: CreationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -119,6 +121,7 @@ export class QrcodeCreationComponent implements OnInit {
     this.creationService.create(this.coursCreationInfos).subscribe(
       (res) => {
         console.log(res);
+        this.router.navigate(['/qrcode', res.token]);
       },
       (err) => {
         console.error(err);
