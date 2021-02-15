@@ -47,11 +47,11 @@ export class AuthService {
   }
 
   public register(profil: TokenPayload): Observable<any> {
-    return this.requestService.request('post', 'register', profil);
+    return this.requestService.request('post', ['register'], profil);
   }
 
   public login(profil: TokenPayload): Observable<any> {
-    return this.requestService.request('post', 'login', profil);
+    return this.requestService.request('post', ['login'], profil);
   }
 
   public logout(): void {

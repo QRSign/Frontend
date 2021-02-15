@@ -16,6 +16,6 @@ export class SignService {
   constructor(private requestService: RequestService) {}
 
   public sign(signature: SignPayload): Observable<any> {
-    return this.requestService.request('post', 'signature', signature);
+    return this.requestService.request('post', ['signature'], signature);
   }
 }
