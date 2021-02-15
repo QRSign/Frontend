@@ -51,10 +51,12 @@
         (mouseenter)="onHover($event)"
         (mouseleave)="onLeave($event)"
       >
-        <mat-icon class="icon delete">delete</mat-icon>
-        <mat-icon class="icon go" (click)="navigateToCourse(course.token)"
-          >forward</mat-icon
-        >
+        <mat-icon class="icon delete" (click)="deleteCourse(course.token)">
+          delete
+        </mat-icon>
+        <mat-icon class="icon go" (click)="navigateToCourse(course.token)">
+          forward
+        </mat-icon>
         <span class="title">
           <span class="title__course">{{ course.title }} :</span>
           {{ formatDate(course.start_time) }}
@@ -71,10 +73,12 @@
         (mouseenter)="onHover($event)"
         (mouseleave)="onLeave($event)"
       >
-        <mat-icon class="icon delete">delete</mat-icon>
-        <mat-icon class="icon go" (click)="navigateToCourse(course.token)"
-          >forward</mat-icon
-        >
+        <mat-icon class="icon delete" (click)="deleteCourse(course.token)">
+          delete
+        </mat-icon>
+        <mat-icon class="icon go" (click)="navigateToCourse(course.token)">
+          forward
+        </mat-icon>
         <span class="title">
           <span class="title__course">{{ course.title }} :</span>
           {{ formatDate(course.start_time) }}

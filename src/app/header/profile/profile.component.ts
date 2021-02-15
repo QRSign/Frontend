@@ -44,6 +44,10 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/qrcode', token]);
   }
 
+  deleteCourse(token): void {
+    console.log('delete', token);
+  }
+
   formatDate(date: string) {
     const newDate = new Date(date);
     const result = `${
