@@ -24,6 +24,12 @@ export class ProfileComponent implements OnInit {
   }
 
   getCourses(result): void {
+    while (this.courses.length > 0) {
+      this.courses.pop();
+    }
+    while (this.passedCourses.length > 0) {
+      this.passedCourses.pop();
+    }
     const today = new Date();
     result.forEach((element) => {
       new Date(element.end_time) < today
@@ -44,8 +50,8 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/qrcode', token]);
   }
 
-  deleteCourse(token): void {
-    console.log('delete', token);
+  deleteCourse(id): void {
+    this.authService.deleteCourse(this, this.updateCourses, id);
   }
 
   formatDate(date: string) {

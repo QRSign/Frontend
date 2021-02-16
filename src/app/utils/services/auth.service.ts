@@ -21,8 +21,6 @@ export class AuthService {
 
   constructor(private router: Router, private requestService: RequestService) {}
 
-  mytest;
-
   public getProfil() {
     return this.profil;
   }
@@ -30,7 +28,7 @@ export class AuthService {
   public getCourses(thisClass, callBack) {
     this.hasCourses(this.profil.id).subscribe(
       (res) => {
-        const result = res.filter((course) => course.user == this.profil.id);
+        const result = res.filter((course) => course.user.id == this.profil.id);
         const call = callBack.bind(thisClass);
         call(result);
       },
@@ -39,6 +37,21 @@ export class AuthService {
       }
     );
     return null;
+  }
+
+  public deleteCourse(thisClass, callBack, id) {
+    this.deleteOneCourse(id).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  public deleteOneCourse(id): Observable<any> {
+    return this.requestService.request('delete', ['qrcode', id]);
   }
 
   public hasCourses(id): Observable<any> {

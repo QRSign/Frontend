@@ -19,7 +19,6 @@ export class ShowQrcodeComponent implements OnInit {
   token;
   students;
   course;
-  prof;
 
   unfoundRoute: boolean = false;
   displayedColumns: string[] = ['Noms', 'Prénoms'];
@@ -28,14 +27,12 @@ export class ShowQrcodeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private requestService: RequestService,
-    private authService: AuthService
+    private requestService: RequestService
   ) {}
 
   ngOnInit(): void {
     this.checkValidRoute();
     this.onChange();
-    this.prof = this.authService.getProfil();
   }
 
   onChange(): void {

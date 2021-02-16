@@ -51,7 +51,7 @@
         (mouseenter)="onHover($event)"
         (mouseleave)="onLeave($event)"
       >
-        <mat-icon class="icon delete" (click)="deleteCourse(course.token)">
+        <mat-icon class="icon delete" (click)="deleteCourse(course.id)">
           delete
         </mat-icon>
         <mat-icon class="icon go" (click)="navigateToCourse(course.token)">
@@ -73,7 +73,7 @@
         (mouseenter)="onHover($event)"
         (mouseleave)="onLeave($event)"
       >
-        <mat-icon class="icon delete" (click)="deleteCourse(course.token)">
+        <mat-icon class="icon delete" (click)="deleteCourse(course.id)">
           delete
         </mat-icon>
         <mat-icon class="icon go" (click)="navigateToCourse(course.token)">

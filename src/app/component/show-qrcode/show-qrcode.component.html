@@ -1,10 +1,10 @@
 <section *ngIf="!unfoundRoute; else unfound" class="show-qrcode">
   <mat-card class="example-card">
-    <mat-card-header>
+    <mat-card-header *ngIf="course">
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{ course?.title }}</mat-card-title>
+      <mat-card-title>{{ course.title }}</mat-card-title>
       <mat-card-subtitle>
-        {{ prof.first_name }} {{ prof.last_name }}
+        {{ course.user.first_name }} {{ course.user.last_name }}
       </mat-card-subtitle>
     </mat-card-header>
     <section class="center-qrcode">
