@@ -22,7 +22,7 @@ export class HistoryComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  displayedColumns: string[] = ['Date', 'Cours', 'PDF'];
+  displayedColumns: string[] = ['Date', 'Cours', 'PDF', 'Sup'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
