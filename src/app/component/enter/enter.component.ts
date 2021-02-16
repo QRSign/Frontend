@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
 import { MessageService } from 'src/app/utils/services/message.service';
 import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
@@ -38,7 +38,8 @@ export class EnterComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private signService: SignService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -121,5 +122,14 @@ export class EnterComponent implements OnInit {
         }
       );
     }
+  }
+
+  isShown: boolean = false; // hidden by default
+
+  toggleShow() {
+    this.isShown = !this.isShown;
+  }
+  naviguate() {
+    this.router.navigateByUrl('/');
   }
 }

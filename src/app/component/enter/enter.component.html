@@ -1,6 +1,7 @@
 <section class="enter">
   <div class="enter__canvas">
     <form (ngSubmit)="onSubmit()" [formGroup]="signForm">
+      <mat-card-title>Signature</mat-card-title>
       <div class="enter__firstname">
         <mat-form-field>
           <mat-label>Prénom</mat-label>
@@ -20,7 +21,7 @@
         </mat-form-field>
       </div>
       <div class="canvas">
-        <canvas #sPad width="450" height="300" class="canvas__box"></canvas>
+        <canvas #sPad width="300" height="200" class="canvas__box"></canvas>
       </div>
       <div class="enter__edit">
         <button
@@ -45,9 +46,23 @@
         [disabled]="!signForm.valid"
         mat-raised-button
         class="custom-button"
+        (click)="toggleShow()"
       >
-        <div class="submit-button" #error>{{ submitButton }}</div>
+        <div class="submit-button" #error>
+          {{ submitButton }}
+        </div>
       </button>
+      <section class="success" *ngIf="isShown" id="divshow">
+        <div class="divSuccess" #error></div>
+        <button
+          type="button"
+          mat-raised-button
+          class="custom-button divSuccess"
+          (click)="naviguate()"
+        >
+          Signature envoyé !
+        </button>
+      </section>
     </form>
   </div>
 </section>
