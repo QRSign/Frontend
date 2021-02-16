@@ -5,11 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
 import { MessageService } from 'src/app/utils/services/message.service';
 import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
-// import { SignService } from 'src/app/utils/services/sign.service';
 
 @Component({
   selector: 'app-enter',
@@ -21,6 +20,8 @@ export class EnterComponent implements OnInit {
   @ViewChild('sPad', { static: true }) signaturePadElement;
   signaturePad: any;
   submitButton: string = 'Soumettre';
+  title: string = 'Signature';
+  hasSigned: boolean = false;
 
   signForm: FormGroup;
 
@@ -38,7 +39,8 @@ export class EnterComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private signService: SignService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -112,12 +114,10 @@ export class EnterComponent implements OnInit {
       this.getToken();
       this.signService.sign(this.formInfos).subscribe(
         (res) => {
-          // TODO
-          // this.router.navigateByUrl('/');
-          console.log(res);
+          this.hasSigned = true;
         },
         (err) => {
-          console.error(err);
+          this.messageService.openSnackBar('Un problème est survenu.', 'error');
         }
       );
     }

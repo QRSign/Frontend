@@ -7,11 +7,13 @@ import {
 } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { ProfileComponent } from 'src/app/header/profile/profile.component';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import {
   CreationCoursPayload,
   CreationService,
 } from 'src/app/utils/services/creation.service';
+import { MessageService } from 'src/app/utils/services/message.service';
 
 @Component({
   selector: 'app-qrcode-creation',
@@ -52,7 +54,9 @@ export class QrcodeCreationComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     private authService: AuthService,
     private creationService: CreationService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+    private menu: ProfileComponent
   ) {}
 
   ngOnInit(): void {
@@ -120,10 +124,11 @@ export class QrcodeCreationComponent implements OnInit {
     this.format();
     this.creationService.create(this.coursCreationInfos).subscribe(
       (res) => {
+        this.menu.updateCourses();
         this.router.navigate(['/qrcode', res.token]);
       },
       (err) => {
-        console.error(err);
+        this.messageService.openSnackBar(err.error.message, 'error');
       }
     );
   }

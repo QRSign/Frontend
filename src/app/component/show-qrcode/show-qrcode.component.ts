@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/utils/services/auth.service';
+import { MessageService } from 'src/app/utils/services/message.service';
 import { RequestService } from 'src/app/utils/services/request.service';
 
 export interface PeriodicElement {
@@ -19,7 +20,6 @@ export class ShowQrcodeComponent implements OnInit {
   token;
   students;
   course;
-  prof;
 
   unfoundRoute: boolean = false;
   displayedColumns: string[] = ['Noms', 'Prénoms'];
@@ -27,15 +27,13 @@ export class ShowQrcodeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private requestService: RequestService,
-    private authService: AuthService
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.checkValidRoute();
     this.onChange();
-    this.prof = this.authService.getProfil();
   }
 
   onChange(): void {
@@ -48,7 +46,9 @@ export class ShowQrcodeComponent implements OnInit {
       (res) => {
         this.students = res;
       },
-      (err) => console.error(err)
+      (err) => {
+        this.messageService.openSnackBar('Un problème est survenu.', 'error');
+      }
     );
   }
 
@@ -67,7 +67,6 @@ export class ShowQrcodeComponent implements OnInit {
         },
         (err) => {
           this.unfoundRoute = true;
-          console.error(err);
         }
       );
     });

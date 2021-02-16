@@ -13,7 +13,7 @@ export class RequestService {
   constructor(private http: HttpClient) {}
 
   public request(
-    method: 'post' | 'get',
+    method: 'post' | 'get' | 'delete',
     type, // Array
     element?
   ): Observable<any> {
@@ -25,6 +25,9 @@ export class RequestService {
         break;
       case 'get':
         base$ = this.http.get(`${this.API}${params}`);
+        break;
+      case 'delete':
+        base$ = this.http.delete(`${this.API}${params}`);
         break;
       default:
         return null;

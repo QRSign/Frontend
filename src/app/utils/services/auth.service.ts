@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MessageService } from './message.service';
 import { RequestService } from './request.service';
 
 export interface TokenPayload {
@@ -15,9 +16,11 @@ export interface TokenPayload {
 export class AuthService {
   private profil;
 
-  constructor(private router: Router, private requestService: RequestService) {}
-
-  mytest;
+  constructor(
+    private router: Router,
+    private requestService: RequestService,
+    private messageService: MessageService
+  ) {}
 
   public getProfil() {
     return this.profil;
@@ -26,15 +29,35 @@ export class AuthService {
   public getCourses(thisClass, callBack) {
     this.hasCourses(this.profil.id).subscribe(
       (res) => {
-        const result = res.filter((course) => course.user == this.profil.id);
+        const result = res.filter((course) => course.user.id == this.profil.id);
         const call = callBack.bind(thisClass);
         call(result);
       },
       (err) => {
-        console.error(err);
+        this.messageService.openSnackBar('Un problème est survenu.', 'error');
       }
     );
     return null;
+  }
+
+  public deleteCourse(thisClass, callBack, id) {
+    this.deleteOneCourse(id).subscribe(
+      (res) => {
+        const call = callBack.bind(thisClass);
+        call(id);
+        this.messageService.openSnackBar(
+          'Cours supprimé avec succés.',
+          'error'
+        );
+      },
+      (err) => {
+        this.messageService.openSnackBar(err.error.message, 'error');
+      }
+    );
+  }
+
+  public deleteOneCourse(id): Observable<any> {
+    return this.requestService.request('delete', ['qrcode', id]);
   }
 
   public hasCourses(id): Observable<any> {
