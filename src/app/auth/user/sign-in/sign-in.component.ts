@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService, TokenPayload } from 'src/app/utils/services/auth.service';
 import { MessageService } from 'src/app/utils/services/message.service';
 
@@ -14,7 +15,9 @@ import { MessageService } from 'src/app/utils/services/message.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
+
   // visibility of password
   hide: boolean = true;
 
@@ -42,20 +45,26 @@ export class SignInComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
   getErrorMessage(type: string = 'default'): string {
     return this.messageService.getErrorMessage(type);
   }
 
   onSubmit(): void {
     this.credentials = this.loginForm.value;
-    this.authService.login(this.credentials).subscribe(
-      (res) => {
-        this.authService.setProfil(res);
-        this.router.navigateByUrl('/');
-      },
-      (err) => {
-        this.messageService.openSnackBar(err.error.message, 'error');
-      }
+    this.subscriptions.push(
+      this.authService.login(this.credentials).subscribe(
+        (res) => {
+          this.authService.setProfil(res);
+          this.router.navigateByUrl('/');
+        },
+        (err) => {
+          this.messageService.openSnackBar(err.error.message, 'error');
+        }
+      )
     );
   }
 }

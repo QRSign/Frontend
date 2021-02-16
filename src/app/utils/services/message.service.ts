@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { SnackbarComponent } from 'src/app/component/snackbar/snackbar.component';
 
 const _defaultErrorMessages = {
@@ -15,8 +16,14 @@ const _defaultErrorMessages = {
 @Injectable({
   providedIn: 'root',
 })
-export class MessageService {
+export class MessageService implements OnDestroy {
+  subscriptions: Subscription[] = [];
+
   constructor(private _snackBar: MatSnackBar) {}
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
 
   getErrorMessage(typeWanted: string, errorMessages?: any): string {
     errorMessages = { ..._defaultErrorMessages, ...errorMessages };

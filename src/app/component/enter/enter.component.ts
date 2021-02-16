@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import SignaturePad from 'signature_pad';
 import { MessageService } from 'src/app/utils/services/message.service';
 import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
@@ -15,7 +16,9 @@ import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
   templateUrl: './enter.component.html',
   styleUrls: ['./enter.component.scss'],
 })
-export class EnterComponent implements OnInit {
+export class EnterComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
+
   @ViewChild('error', { static: true }) errorElement;
   @ViewChild('sPad', { static: true }) signaturePadElement;
   signaturePad: any;
@@ -48,6 +51,10 @@ export class EnterComponent implements OnInit {
       last_name: this.last_name,
       first_name: this.first_name,
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   ngAfterViewInit(): void {
@@ -98,10 +105,12 @@ export class EnterComponent implements OnInit {
   }
 
   getToken(): void {
-    this.route.paramMap.subscribe((param) => {
-      const token = param.get('token');
-      this.formInfos.token = token;
-    });
+    this.subscriptions.push(
+      this.route.paramMap.subscribe((param) => {
+        const token = param.get('token');
+        this.formInfos.token = token;
+      })
+    );
   }
 
   onSubmit(): void {
@@ -112,13 +121,18 @@ export class EnterComponent implements OnInit {
       this.addSignature(dataURL);
       this.formInfos = this.signForm.value;
       this.getToken();
-      this.signService.sign(this.formInfos).subscribe(
-        (res) => {
-          this.hasSigned = true;
-        },
-        (err) => {
-          this.messageService.openSnackBar('Un problème est survenu.', 'error');
-        }
+      this.subscriptions.push(
+        this.signService.sign(this.formInfos).subscribe(
+          (res) => {
+            this.hasSigned = true;
+          },
+          (err) => {
+            this.messageService.openSnackBar(
+              'Un problème est survenu.',
+              'error'
+            );
+          }
+        )
       );
     }
   }

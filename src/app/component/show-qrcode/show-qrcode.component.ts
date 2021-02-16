@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -16,7 +16,9 @@ export interface PeriodicElement {
   templateUrl: './show-qrcode.component.html',
   styleUrls: ['./show-qrcode.component.scss'],
 })
-export class ShowQrcodeComponent implements OnInit {
+export class ShowQrcodeComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
+
   token;
   students;
   course;
@@ -36,19 +38,25 @@ export class ShowQrcodeComponent implements OnInit {
     this.onChange();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
   onChange(): void {
     const vm = this;
     setInterval(() => vm.getStudents(), 5000);
   }
 
   getStudents(): void {
-    this.hasStudents(this.token).subscribe(
-      (res) => {
-        this.students = res;
-      },
-      (err) => {
-        this.messageService.openSnackBar('Un problème est survenu.', 'error');
-      }
+    this.subscriptions.push(
+      this.hasStudents(this.token).subscribe(
+        (res) => {
+          this.students = res;
+        },
+        (err) => {
+          this.messageService.openSnackBar('Un problème est survenu.', 'error');
+        }
+      )
     );
   }
 
@@ -57,19 +65,21 @@ export class ShowQrcodeComponent implements OnInit {
   }
 
   checkValidRoute(): void {
-    this.route.paramMap.subscribe((param) => {
-      const token = param.get('token');
-      this.getToken(token).subscribe(
-        (res) => {
-          this.token = token;
-          this.qrLink += token;
-          this.course = res;
-        },
-        (err) => {
-          this.unfoundRoute = true;
-        }
-      );
-    });
+    this.subscriptions.push(
+      this.route.paramMap.subscribe((param) => {
+        const token = param.get('token');
+        this.getToken(token).subscribe(
+          (res) => {
+            this.token = token;
+            this.qrLink += token;
+            this.course = res;
+          },
+          (err) => {
+            this.unfoundRoute = true;
+          }
+        );
+      })
+    );
   }
 
   getToken(token: string): Observable<any> {

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MessageService } from './message.service';
 import { RequestService } from './request.service';
 
@@ -13,7 +13,9 @@ export interface TokenPayload {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
+  subscriptions: Subscription[] = [];
+
   private profil;
 
   constructor(
@@ -22,37 +24,47 @@ export class AuthService {
     private messageService: MessageService
   ) {}
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
   public getProfil() {
     return this.profil;
   }
 
   public getCourses(thisClass, callBack) {
-    this.hasCourses(this.profil.id).subscribe(
-      (res) => {
-        const result = res.filter((course) => course.user.id == this.profil.id);
-        const call = callBack.bind(thisClass);
-        call(result);
-      },
-      (err) => {
-        this.messageService.openSnackBar('Un problème est survenu.', 'error');
-      }
+    this.subscriptions.push(
+      this.hasCourses(this.profil.id).subscribe(
+        (res) => {
+          const result = res.filter(
+            (course) => course.user.id == this.profil.id
+          );
+          const call = callBack.bind(thisClass);
+          call(result);
+        },
+        (err) => {
+          this.messageService.openSnackBar('Un problème est survenu.', 'error');
+        }
+      )
     );
     return null;
   }
 
   public deleteCourse(thisClass, callBack, id) {
-    this.deleteOneCourse(id).subscribe(
-      (res) => {
-        const call = callBack.bind(thisClass);
-        call(id);
-        this.messageService.openSnackBar(
-          'Cours supprimé avec succés.',
-          'error'
-        );
-      },
-      (err) => {
-        this.messageService.openSnackBar(err.error.message, 'error');
-      }
+    this.subscriptions.push(
+      this.deleteOneCourse(id).subscribe(
+        (res) => {
+          const call = callBack.bind(thisClass);
+          call(id);
+          this.messageService.openSnackBar(
+            'Cours supprimé avec succés.',
+            'error'
+          );
+        },
+        (err) => {
+          this.messageService.openSnackBar(err.error.message, 'error');
+        }
+      )
     );
   }
 

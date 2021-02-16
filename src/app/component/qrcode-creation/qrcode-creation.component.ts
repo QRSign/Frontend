@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ProfileComponent } from 'src/app/header/profile/profile.component';
 import { AuthService } from 'src/app/utils/services/auth.service';
 import {
@@ -20,7 +21,9 @@ import { MessageService } from 'src/app/utils/services/message.service';
   templateUrl: './qrcode-creation.component.html',
   styleUrls: ['./qrcode-creation.component.scss'],
 })
-export class QrcodeCreationComponent implements OnInit {
+export class QrcodeCreationComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
+
   title: string = 'Créer un nouveau cours';
   now: Date = new Date();
 
@@ -68,6 +71,10 @@ export class QrcodeCreationComponent implements OnInit {
       timer: this.timer,
       timeUnity: this.timeUnity,
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   format(): void {
@@ -122,14 +129,16 @@ export class QrcodeCreationComponent implements OnInit {
 
   onSubmit(): void {
     this.format();
-    this.creationService.create(this.coursCreationInfos).subscribe(
-      (res) => {
-        this.menu.updateCourses();
-        this.router.navigate(['/qrcode', res.token]);
-      },
-      (err) => {
-        this.messageService.openSnackBar(err.error.message, 'error');
-      }
+    this.subscriptions.push(
+      this.creationService.create(this.coursCreationInfos).subscribe(
+        (res) => {
+          this.menu.updateCourses();
+          this.router.navigate(['/qrcode', res.token]);
+        },
+        (err) => {
+          this.messageService.openSnackBar(err.error.message, 'error');
+        }
+      )
     );
   }
 }
