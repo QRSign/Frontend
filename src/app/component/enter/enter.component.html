@@ -1,24 +1,32 @@
 <section class="enter">
   <div class="enter__canvas">
-    <form (ngSubmit)="onSubmit()" [formGroup]="signForm">
-      <mat-card-title>Signature</mat-card-title>
-      <div class="enter__firstname">
-        <mat-form-field>
-          <mat-label>Prénom</mat-label>
-          <input matInput type="text" formControlName="first_name" />
-          <mat-error *ngIf="first_name.invalid">{{
-            getErrorMessage("required")
-          }}</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="enter__lastname">
-        <mat-form-field>
-          <mat-label>Nom</mat-label>
-          <input matInput type="text" formControlName="last_name" />
-          <mat-error *ngIf="last_name.invalid">{{
-            getErrorMessage("required")
-          }}</mat-error>
-        </mat-form-field>
+    <div class="qrcode-creation__title">
+      <app-title [title]="title"></app-title>
+    </div>
+    <form
+      (ngSubmit)="onSubmit()"
+      [class.signed]="hasSigned"
+      [formGroup]="signForm"
+    >
+      <div class="column-display">
+        <div class="enter__firstname">
+          <mat-form-field>
+            <mat-label>Prénom</mat-label>
+            <input matInput type="text" formControlName="first_name" />
+            <mat-error *ngIf="first_name.invalid">{{
+              getErrorMessage("required")
+            }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="enter__lastname">
+          <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <input matInput type="text" formControlName="last_name" />
+            <mat-error *ngIf="last_name.invalid">{{
+              getErrorMessage("required")
+            }}</mat-error>
+          </mat-form-field>
+        </div>
       </div>
       <div class="canvas">
         <canvas #sPad width="300" height="200" class="canvas__box"></canvas>
@@ -46,23 +54,21 @@
         [disabled]="!signForm.valid"
         mat-raised-button
         class="custom-button"
-        (click)="toggleShow()"
       >
         <div class="submit-button" #error>
           {{ submitButton }}
         </div>
       </button>
-      <section class="success" *ngIf="isShown" id="divshow">
-        <div class="divSuccess" #error></div>
-        <button
-          type="button"
-          mat-raised-button
-          class="custom-button divSuccess"
-          (click)="naviguate()"
-        >
-          Signature envoyé !
-        </button>
-      </section>
     </form>
+  </div>
+  <div *ngIf="hasSigned" class="success-card">
+    <mat-card class="success-card__card">
+      <div class="check">
+        <mat-icon class="check__icon">done</mat-icon>
+      </div>
+      <mat-card-content>
+        <strong>Signature validée</strong>
+      </mat-card-content>
+    </mat-card>
   </div>
 </section>

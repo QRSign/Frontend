@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import SignaturePad from 'signature_pad';
 import { MessageService } from 'src/app/utils/services/message.service';
 import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
-// import { SignService } from 'src/app/utils/services/sign.service';
 
 @Component({
   selector: 'app-enter',
@@ -21,6 +20,8 @@ export class EnterComponent implements OnInit {
   @ViewChild('sPad', { static: true }) signaturePadElement;
   signaturePad: any;
   submitButton: string = 'Soumettre';
+  title: string = 'Signature';
+  hasSigned: boolean = false;
 
   signForm: FormGroup;
 
@@ -114,22 +115,12 @@ export class EnterComponent implements OnInit {
       console.log(this.formInfos);
       this.signService.sign(this.formInfos).subscribe(
         (res) => {
-          // this.router.navigateByUrl('/');
-          console.log(res);
+          this.hasSigned = true;
         },
         (err) => {
           console.error(err);
         }
       );
     }
-  }
-
-  isShown: boolean = false; // hidden by default
-
-  toggleShow() {
-    this.isShown = !this.isShown;
-  }
-  naviguate() {
-    this.router.navigateByUrl('/');
   }
 }
