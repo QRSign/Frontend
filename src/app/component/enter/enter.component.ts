@@ -110,9 +110,9 @@ export class EnterComponent implements OnInit {
       this.addSignature(dataURL);
       this.formInfos = this.signForm.value;
       this.getToken();
-      console.log(this.formInfos);
       this.signService.sign(this.formInfos).subscribe(
         (res) => {
+          // TODO
           // this.router.navigateByUrl('/');
           console.log(res);
         },

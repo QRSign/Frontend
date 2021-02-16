@@ -23,7 +23,7 @@ export class ShowQrcodeComponent implements OnInit {
 
   unfoundRoute: boolean = false;
   displayedColumns: string[] = ['Noms', 'Prénoms'];
-  public qrLink: string = 'http://localhost:4200/enter/';
+  public qrLink: string = 'https://main.d2btqewiqb0j8q.amplifyapp.com/enter/';
 
   constructor(
     private route: ActivatedRoute,

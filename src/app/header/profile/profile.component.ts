@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteCourse(token): void {
+    // TODO
     console.log('delete', token);
   }
 

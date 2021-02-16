@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class RequestService {
+  // TODO
   private API: string = 'http://127.0.0.1:5000';
 
   constructor(private http: HttpClient) {}

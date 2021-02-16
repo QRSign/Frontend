@@ -120,7 +120,6 @@ export class QrcodeCreationComponent implements OnInit {
     this.format();
     this.creationService.create(this.coursCreationInfos).subscribe(
       (res) => {
-        console.log(res);
         this.router.navigate(['/qrcode', res.token]);
       },
       (err) => {

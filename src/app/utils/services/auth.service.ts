@@ -3,10 +3,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RequestService } from './request.service';
 
-// interface TokenResponse {
-//   token: string;
-// }
-
 export interface TokenPayload {
   mail: string;
   password: string;
