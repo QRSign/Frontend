@@ -47,6 +47,8 @@ export class AuthService {
   public deleteCourse(thisClass, callBack, id) {
     this.deleteOneCourse(id).subscribe(
       (res) => {
+        const call = callBack.bind(thisClass);
+        call(id);
         this.messageService.openSnackBar(
           'Cours supprimé avec succés.',
           'error'

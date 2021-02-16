@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/utils/services/auth.service';
 
@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/utils/services/auth.service';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+})
+@Injectable({
+  providedIn: 'root',
 })
 export class ProfileComponent implements OnInit {
   @Input() profil;
@@ -24,17 +27,17 @@ export class ProfileComponent implements OnInit {
   }
 
   getCourses(result): void {
-    while (this.courses.length > 0) {
-      this.courses.pop();
-    }
-    while (this.passedCourses.length > 0) {
-      this.passedCourses.pop();
-    }
     const today = new Date();
     result.forEach((element) => {
-      new Date(element.end_time) < today
-        ? this.passedCourses.push(element)
-        : this.courses.push(element);
+      if (new Date(element.end_time) < today) {
+        if (this.passedCourses.indexOf(1) === -1) {
+          this.passedCourses.push(element);
+        }
+      } else {
+        if (this.courses.indexOf(1) === -1) {
+          this.courses.push(element);
+        }
+      }
     });
   }
 
@@ -50,8 +53,21 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/qrcode', token]);
   }
 
+  updateDeleteCourse(id) {
+    this.courses.forEach((element) => {
+      if (element.id == id) {
+        this.courses.splice(element, 1);
+      }
+    });
+    this.passedCourses.forEach((element) => {
+      if (element.id == id) {
+        this.passedCourses.splice(element, 1);
+      }
+    });
+  }
+
   deleteCourse(id): void {
-    this.authService.deleteCourse(this, this.updateCourses, id);
+    this.authService.deleteCourse(this, this.updateDeleteCourse, id);
   }
 
   formatDate(date: string) {
