@@ -112,13 +112,12 @@ export class EnterComponent implements OnInit {
       this.addSignature(dataURL);
       this.formInfos = this.signForm.value;
       this.getToken();
-      console.log(this.formInfos);
       this.signService.sign(this.formInfos).subscribe(
         (res) => {
           this.hasSigned = true;
         },
         (err) => {
-          console.error(err);
+          this.messageService.openSnackBar('Un problème est survenu.', 'error');
         }
       );
     }

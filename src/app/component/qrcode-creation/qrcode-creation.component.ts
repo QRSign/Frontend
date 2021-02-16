@@ -12,6 +12,7 @@ import {
   CreationCoursPayload,
   CreationService,
 } from 'src/app/utils/services/creation.service';
+import { MessageService } from 'src/app/utils/services/message.service';
 
 @Component({
   selector: 'app-qrcode-creation',
@@ -52,7 +53,8 @@ export class QrcodeCreationComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     private authService: AuthService,
     private creationService: CreationService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -120,11 +122,10 @@ export class QrcodeCreationComponent implements OnInit {
     this.format();
     this.creationService.create(this.coursCreationInfos).subscribe(
       (res) => {
-        console.log(res);
         this.router.navigate(['/qrcode', res.token]);
       },
       (err) => {
-        console.error(err);
+        this.messageService.openSnackBar(err.error.message, 'error');
       }
     );
   }

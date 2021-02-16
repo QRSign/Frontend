@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MessageService } from './message.service';
 import { RequestService } from './request.service';
 
 // interface TokenResponse {
@@ -19,7 +20,11 @@ export interface TokenPayload {
 export class AuthService {
   private profil;
 
-  constructor(private router: Router, private requestService: RequestService) {}
+  constructor(
+    private router: Router,
+    private requestService: RequestService,
+    private messageService: MessageService
+  ) {}
 
   public getProfil() {
     return this.profil;
@@ -33,7 +38,7 @@ export class AuthService {
         call(result);
       },
       (err) => {
-        console.error(err);
+        this.messageService.openSnackBar('Un problème est survenu.', 'error');
       }
     );
     return null;
@@ -42,10 +47,13 @@ export class AuthService {
   public deleteCourse(thisClass, callBack, id) {
     this.deleteOneCourse(id).subscribe(
       (res) => {
-        console.log(res);
+        this.messageService.openSnackBar(
+          'Cours supprimé avec succés.',
+          'error'
+        );
       },
       (err) => {
-        console.error(err);
+        this.messageService.openSnackBar(err.error.message, 'error');
       }
     );
   }

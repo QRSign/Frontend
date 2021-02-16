@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarComponent } from 'src/app/component/snackbar/snackbar.component';
 
 const _defaultErrorMessages = {
   required: () => `Ce champ est obligatoire`,
@@ -14,7 +16,7 @@ const _defaultErrorMessages = {
   providedIn: 'root',
 })
 export class MessageService {
-  constructor() {}
+  constructor(private _snackBar: MatSnackBar) {}
 
   getErrorMessage(typeWanted: string, errorMessages?: any): string {
     errorMessages = { ..._defaultErrorMessages, ...errorMessages };
@@ -26,5 +28,38 @@ export class MessageService {
       }
     }
     return erreur;
+  }
+
+  /**
+   * Ouverture de la snackbar
+   * @param message
+   * @param classe
+   */
+  openSnackBar(
+    message: string,
+    classe: 'success' | 'error',
+    duration = 2000,
+    action?: string,
+    callback?: any
+  ) {
+    const snackBarRef = this._snackBar.openFromComponent(SnackbarComponent, {
+      data: {
+        message,
+        action,
+        classe,
+      },
+      duration: duration,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+    });
+    if (action) {
+      const snackBarSubscription = snackBarRef.onAction().subscribe(() => {
+        callback();
+        snackBarRef.dismiss();
+      });
+      snackBarRef.afterDismissed().subscribe(() => {
+        snackBarSubscription.unsubscribe();
+      });
+    }
   }
 }

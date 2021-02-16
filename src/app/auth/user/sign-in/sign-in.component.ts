@@ -54,7 +54,7 @@ export class SignInComponent implements OnInit {
         this.router.navigateByUrl('/');
       },
       (err) => {
-        console.error(err);
+        this.messageService.openSnackBar(err.error.message, 'error');
       }
     );
   }

@@ -35,6 +35,8 @@ import { MatCardModule } from '@angular/material/card';
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrcodeComponentComponent } from './component/qrcode-component/qrcode-component.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackbarComponent } from './component/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     ShowQrcodeComponent,
     QrcodeComponentComponent,
     NotFoundComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,8 +77,9 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     MatMenuModule,
     MatTableModule,
     MatCardModule,
-    NgxMaterialTimepickerModule.setLocale('fr'),
+    MatSnackBarModule,
     QRCodeModule,
+    NgxMaterialTimepickerModule.setLocale('fr'),
   ],
   providers: [],
   bootstrap: [AppComponent],
