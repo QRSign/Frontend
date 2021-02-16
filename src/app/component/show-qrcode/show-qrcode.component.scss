@@ -16,3 +16,12 @@
   display: flex;
   justify-content: center;
 }
+
+.mat-card-link {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  a {
+    text-decoration: none;
+  }
+}

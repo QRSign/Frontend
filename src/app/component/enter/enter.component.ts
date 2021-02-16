@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import SignaturePad from 'signature_pad';
 import { MessageService } from 'src/app/utils/services/message.service';
 import { SignPayload, SignService } from 'src/app/utils/services/sign.service';
@@ -34,6 +35,7 @@ export class EnterComponent implements OnInit {
   };
 
   constructor(
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private signService: SignService,
     private messageService: MessageService
@@ -93,6 +95,13 @@ export class EnterComponent implements OnInit {
     }, 2300);
   }
 
+  getToken(): void {
+    this.route.paramMap.subscribe((param) => {
+      const token = param.get('token');
+      this.formInfos.token = token;
+    });
+  }
+
   onSubmit(): void {
     if (this.signaturePad.isEmpty()) {
       this.toggleError();
@@ -100,6 +109,7 @@ export class EnterComponent implements OnInit {
       const dataURL = this.signaturePad.toDataURL();
       this.addSignature(dataURL);
       this.formInfos = this.signForm.value;
+      this.getToken();
       console.log(this.formInfos);
       this.signService.sign(this.formInfos).subscribe(
         (res) => {

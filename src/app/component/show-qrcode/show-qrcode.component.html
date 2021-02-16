@@ -2,8 +2,10 @@
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Ux Design</mat-card-title>
-      <mat-card-subtitle>Galimede</mat-card-subtitle>
+      <mat-card-title>{{ course?.title }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ prof.first_name }} {{ prof.last_name }}
+      </mat-card-subtitle>
     </mat-card-header>
     <section class="center-qrcode">
       <qrcode
@@ -13,6 +15,10 @@
         [elementType]="'svg'"
       ></qrcode>
     </section>
+    <mat-card-actions class="mat-card-link">
+      <a [href]="qrLink" mat-button> Lien vers le formulaire de signature </a>
+      <a [href]="qrLink" mat-button>{{ qrLink }}</a>
+    </mat-card-actions>
   </mat-card>
 
   <mat-card class="example-card">

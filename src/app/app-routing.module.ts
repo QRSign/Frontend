@@ -13,7 +13,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 const routes: Routes = [
   { path: 'auth', component: UserComponent },
   {
-    path: 'enter',
+    path: 'enter/:token',
     component: EnterComponent,
   },
   {
