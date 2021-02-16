@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class RequestService {
   // TODO
-  private API: string = 'http://127.0.0.1:5000';
+  private API: string = 'https://qr-sign-backend.herokuapp.com';
 
   constructor(private http: HttpClient) {}
 
